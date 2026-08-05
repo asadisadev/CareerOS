@@ -82,11 +82,12 @@ export const jobs: Job[] = [
 export const savedJobs = jobs.slice(1, 4).map((j) => ({ ...j, status: "saved" as const }));
 
 export const applications: Job[] = [
-  { ...jobs[0], status: "interview" },
-  { ...jobs[2], status: "applied" },
-  { ...jobs[3], status: "offer" },
-  { ...jobs[4], status: "rejected" },
+  { ...jobs[0]!, status: "interview" },
+  { ...jobs[2]!, status: "applied" },
+  { ...jobs[3]!, status: "offer" },
+  { ...jobs[4]!, status: "rejected" },
 ];
+
 
 export const skillGaps = [
   { skill: "Design Systems", you: 82, market: 90 },
