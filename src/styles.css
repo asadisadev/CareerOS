@@ -36,6 +36,8 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-brand: var(--primary);
+  --color-brand-accent: var(--brand-accent);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-success: var(--success);
@@ -79,8 +81,9 @@
   --secondary-foreground: oklch(0.26 0.03 265);
   --muted: oklch(0.966 0.006 265);
   --muted-foreground: oklch(0.53 0.024 262);
-  --accent: oklch(0.541 0.253 293);
-  --accent-foreground: oklch(0.99 0.005 280);
+  --accent: oklch(0.955 0.022 292);
+  --accent-foreground: oklch(0.33 0.11 288);
+  --brand-accent: oklch(0.541 0.253 293);
 
   --destructive: oklch(0.628 0.226 25.5);
   --destructive-foreground: oklch(0.99 0.005 280);
@@ -94,7 +97,7 @@
   --ring: oklch(0.511 0.242 277);
 
   --chart-1: oklch(0.511 0.242 277);
-  --chart-2: oklch(0.541 0.253 293);
+  --chart-2: oklch(0.541 0.253 293); /* brand accent */
   --chart-3: oklch(0.681 0.153 162.5);
   --chart-4: oklch(0.771 0.164 70);
   --chart-5: oklch(0.628 0.226 25.5);
@@ -108,7 +111,7 @@
   --sidebar-border: oklch(0.922 0.008 265);
   --sidebar-ring: oklch(0.511 0.242 277);
 
-  --gradient-brand: linear-gradient(135deg, var(--primary), var(--accent));
+  --gradient-brand: linear-gradient(135deg, var(--primary), var(--brand-accent));
   --gradient-surface: linear-gradient(
     180deg,
     color-mix(in oklab, var(--primary) 7%, transparent),
@@ -135,8 +138,9 @@
   --secondary-foreground: oklch(0.955 0.006 265);
   --muted: oklch(0.258 0.022 268);
   --muted-foreground: oklch(0.715 0.024 264);
-  --accent: oklch(0.655 0.214 293);
-  --accent-foreground: oklch(0.15 0.03 275);
+  --accent: oklch(0.278 0.045 288);
+  --accent-foreground: oklch(0.955 0.01 288);
+  --brand-accent: oklch(0.655 0.214 293);
 
   --destructive: oklch(0.672 0.21 25.5);
   --destructive-foreground: oklch(0.15 0.03 275);
@@ -150,7 +154,7 @@
   --ring: oklch(0.638 0.208 277);
 
   --chart-1: oklch(0.638 0.208 277);
-  --chart-2: oklch(0.655 0.214 293);
+  --chart-2: oklch(0.655 0.214 293); /* brand accent */
   --chart-3: oklch(0.723 0.15 162.5);
   --chart-4: oklch(0.807 0.156 70);
   --chart-5: oklch(0.672 0.21 25.5);
