@@ -59,13 +59,9 @@ const accountNav = [
   { label: "Admin", to: "/app/admin" as const, icon: Shield },
 ];
 
-function NavList({
-  items,
-  pathname,
-}: {
-  items: typeof primaryNav;
-  pathname: string;
-}) {
+type NavItem = (typeof primaryNav)[number] | (typeof accountNav)[number];
+
+function NavList({ items, pathname }: { items: readonly NavItem[]; pathname: string }) {
   return (
     <SidebarMenu>
       {items.map((item) => {
