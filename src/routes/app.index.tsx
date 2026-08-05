@@ -24,7 +24,7 @@ function DashboardPage() {
   const metrics = [
     { label: "Resume score", value: scores.resume },
     { label: "ATS score", value: scores.ats },
-    { label: "Portfolio views", value: scores.portfolioViews },
+    { label: "Portfolio views", value: scores.portfolio },
     { label: "Active matches", value: jobs.length },
   ];
 
