@@ -108,7 +108,7 @@ function LoginPage() {
               <FormItem className="flex items-center gap-2.5">
                 <FormControl>
                   <Checkbox
-                    checked={field.value}
+                    checked={field.value ?? false}
                     onCheckedChange={(v) => field.onChange(Boolean(v))}
                     id="remember"
                   />
