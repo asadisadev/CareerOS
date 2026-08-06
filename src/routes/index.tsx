@@ -1,5 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Hero, Features, HowItWorks, Templates, Pricing, Testimonials, Faq, FinalCta } from "@/components/marketing/sections";
+import { Hero, Features, HowItWorks, Pricing, Testimonials, Faq, FinalCta } from "@/components/marketing/sections";
+import {
+  AiDemo,
+  PortfolioShowcase,
+  Problem,
+  ResumeShowcase,
+  TrustedBy,
+} from "@/components/marketing/sections-extra";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { SiteNavbar } from "@/components/marketing/site-navbar";
 
@@ -31,13 +38,18 @@ function LandingPage() {
       <SiteNavbar />
       <main>
         <Hero />
+        <TrustedBy />
+        <Problem />
         <Features />
         <HowItWorks />
-        <Templates />
+        <PortfolioShowcase />
+        <ResumeShowcase />
+        <AiDemo />
         <Pricing />
         <Testimonials />
         <Faq />
         <FinalCta />
+
       </main>
       <SiteFooter />
     </div>

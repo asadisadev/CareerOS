@@ -17,6 +17,14 @@ import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as TemplatesRouteImport } from './routes/templates'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAdminRouteImport } from './routes/app.admin'
+import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
+import { Route as AppBillingRouteImport } from './routes/app.billing'
+import { Route as AppCoachRouteImport } from './routes/app.coach'
+import { Route as AppJobsRouteImport } from './routes/app.jobs'
+import { Route as AppPortfolioRouteImport } from './routes/app.portfolio'
+import { Route as AppResumeRouteImport } from './routes/app.resume'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth.forgot-password'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
@@ -63,6 +71,46 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAdminRoute = AppAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBillingRoute = AppBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCoachRoute = AppCoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppJobsRoute = AppJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPortfolioRoute = AppPortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResumeRoute = AppResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
 const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
@@ -97,6 +145,14 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/pricing': typeof PricingRoute
   '/templates': typeof TemplatesRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/coach': typeof AppCoachRoute
+  '/app/jobs': typeof AppJobsRoute
+  '/app/portfolio': typeof AppPortfolioRoute
+  '/app/resume': typeof AppResumeRoute
+  '/app/settings': typeof AppSettingsRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
@@ -111,6 +167,14 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/pricing': typeof PricingRoute
   '/templates': typeof TemplatesRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/coach': typeof AppCoachRoute
+  '/app/jobs': typeof AppJobsRoute
+  '/app/portfolio': typeof AppPortfolioRoute
+  '/app/resume': typeof AppResumeRoute
+  '/app/settings': typeof AppSettingsRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
@@ -127,6 +191,14 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/pricing': typeof PricingRoute
   '/templates': typeof TemplatesRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/analytics': typeof AppAnalyticsRoute
+  '/app/billing': typeof AppBillingRoute
+  '/app/coach': typeof AppCoachRoute
+  '/app/jobs': typeof AppJobsRoute
+  '/app/portfolio': typeof AppPortfolioRoute
+  '/app/resume': typeof AppResumeRoute
+  '/app/settings': typeof AppSettingsRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
@@ -144,6 +216,14 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/pricing'
     | '/templates'
+    | '/app/admin'
+    | '/app/analytics'
+    | '/app/billing'
+    | '/app/coach'
+    | '/app/jobs'
+    | '/app/portfolio'
+    | '/app/resume'
+    | '/app/settings'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
@@ -158,6 +238,14 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/pricing'
     | '/templates'
+    | '/app/admin'
+    | '/app/analytics'
+    | '/app/billing'
+    | '/app/coach'
+    | '/app/jobs'
+    | '/app/portfolio'
+    | '/app/resume'
+    | '/app/settings'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
@@ -173,6 +261,14 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/pricing'
     | '/templates'
+    | '/app/admin'
+    | '/app/analytics'
+    | '/app/billing'
+    | '/app/coach'
+    | '/app/jobs'
+    | '/app/portfolio'
+    | '/app/resume'
+    | '/app/settings'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
@@ -249,6 +345,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/admin': {
+      id: '/app/admin'
+      path: '/admin'
+      fullPath: '/app/admin'
+      preLoaderRoute: typeof AppAdminRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/analytics': {
+      id: '/app/analytics'
+      path: '/analytics'
+      fullPath: '/app/analytics'
+      preLoaderRoute: typeof AppAnalyticsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/billing': {
+      id: '/app/billing'
+      path: '/billing'
+      fullPath: '/app/billing'
+      preLoaderRoute: typeof AppBillingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/coach': {
+      id: '/app/coach'
+      path: '/coach'
+      fullPath: '/app/coach'
+      preLoaderRoute: typeof AppCoachRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/jobs': {
+      id: '/app/jobs'
+      path: '/jobs'
+      fullPath: '/app/jobs'
+      preLoaderRoute: typeof AppJobsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/portfolio': {
+      id: '/app/portfolio'
+      path: '/portfolio'
+      fullPath: '/app/portfolio'
+      preLoaderRoute: typeof AppPortfolioRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/resume': {
+      id: '/app/resume'
+      path: '/resume'
+      fullPath: '/app/resume'
+      preLoaderRoute: typeof AppResumeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/auth/forgot-password': {
       id: '/auth/forgot-password'
       path: '/forgot-password'
@@ -288,10 +440,26 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAdminRoute: typeof AppAdminRoute
+  AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppBillingRoute: typeof AppBillingRoute
+  AppCoachRoute: typeof AppCoachRoute
+  AppJobsRoute: typeof AppJobsRoute
+  AppPortfolioRoute: typeof AppPortfolioRoute
+  AppResumeRoute: typeof AppResumeRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAdminRoute: AppAdminRoute,
+  AppAnalyticsRoute: AppAnalyticsRoute,
+  AppBillingRoute: AppBillingRoute,
+  AppCoachRoute: AppCoachRoute,
+  AppJobsRoute: AppJobsRoute,
+  AppPortfolioRoute: AppPortfolioRoute,
+  AppResumeRoute: AppResumeRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
 }
 

@@ -12,6 +12,7 @@ import {
   LayoutTemplate,
   LineChart,
   Mail,
+  PlayCircle,
   ShieldCheck,
   Sparkles,
   Star,
@@ -67,22 +68,25 @@ export function Hero() {
             <span className="text-muted-foreground">· v2.0</span>
           </span>
           <h1 className="text-balance text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Build. Showcase. <span className="text-gradient">Get Hired.</span>
+            Build Your Career <span className="text-gradient">with AI</span>
           </h1>
           <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            CareerOS AI turns your experience into an ATS-ready resume, a hosted portfolio and a
-            targeted job pipeline — guided end to end by an AI career coach.
+            Create ATS-friendly resumes, generate professional portfolios, improve your career, and
+            get hired faster using AI.
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Button asChild variant="hero" size="xl">
               <Link to="/auth/register">
-                Start free — no card <ArrowRight />
+                Start Free <ArrowRight />
               </Link>
             </Button>
             <Button asChild variant="outline" size="xl">
-              <Link to="/app">Explore live demo</Link>
+              <Link to="/how-it-works">
+                <PlayCircle /> Watch Demo
+              </Link>
             </Button>
           </div>
+
           <dl className="grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-7">
             {[
               { k: "142k", v: "Resumes optimized" },
@@ -204,8 +208,8 @@ export function Features() {
   return (
     <Section id="features" className="border-t border-border">
       <SectionHeading
-        eyebrow="Platform"
-        title="One workspace for your entire career"
+        eyebrow="The solution"
+        title="CareerOS AI solves all of it, in one place"
         description="Eight connected modules that share the same profile, so every improvement compounds across your resume, portfolio and applications."
       />
       <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -228,18 +232,12 @@ export function Features() {
 }
 
 const steps = [
-  {
-    title: "Import your story",
-    body: "Paste a resume, connect LinkedIn or answer a few guided prompts. We structure everything for you.",
-  },
-  {
-    title: "Let AI sharpen it",
-    body: "Rewrites, metrics, keyword targeting and grammar fixes — reviewed by you, applied in one click.",
-  },
-  {
-    title: "Publish and apply",
-    body: "Ship your portfolio to a custom domain, export your resume and track every application in one place.",
-  },
+  { title: "Create Account", body: "Sign up free in seconds — email or Google. No credit card, no setup wizard." },
+  { title: "Tell AI About Yourself", body: "Paste an old resume, connect LinkedIn, or answer six guided questions." },
+  { title: "Generate Resume", body: "Pick a template and CareerOS writes structured, metric-driven bullet points." },
+  { title: "Generate Portfolio", body: "Your projects become a hosted portfolio site with SEO and analytics built in." },
+  { title: "Improve ATS Score", body: "Paste the job description and apply keyword, format and grammar fixes in one click." },
+  { title: "Get Job Recommendations", body: "Receive scored matches daily and track every application through to the offer." },
 ];
 
 export function HowItWorks() {
@@ -247,18 +245,27 @@ export function HowItWorks() {
     <Section id="how-it-works" className="border-t border-border bg-card/40">
       <SectionHeading
         eyebrow="How it works"
-        title="From blank page to shortlisted in three steps"
+        title="Six steps from blank page to shortlisted"
         description="Most users publish a portfolio and an ATS-optimized resume in under 30 minutes."
       />
-      <ol className="mt-14 grid gap-4 md:grid-cols-3">
+      <ol className="relative mx-auto mt-14 max-w-3xl">
+        <span
+          aria-hidden="true"
+          className="absolute left-5 top-4 bottom-4 w-px bg-gradient-to-b from-primary/60 via-border to-transparent"
+        />
         {steps.map((s, i) => (
-          <motion.li key={s.title} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}>
-            <Card className="h-full rounded-2xl shadow-soft">
-              <CardContent className="space-y-3 p-7">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-brand font-display text-sm font-extrabold text-primary-foreground">
-                  {i + 1}
-                </span>
-                <h3 className="font-display text-lg font-bold">{s.title}</h3>
+          <motion.li
+            key={s.title}
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: i * 0.06 }}
+            className="relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-5 pb-6 last:pb-0"
+          >
+            <span className="relative z-10 grid h-10 w-10 place-items-center rounded-xl bg-gradient-brand font-display text-sm font-extrabold text-primary-foreground shadow-glow">
+              {i + 1}
+            </span>
+            <Card className="rounded-2xl shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift">
+              <CardContent className="space-y-1.5 p-5 sm:p-6">
+                <h3 className="font-display text-base font-bold sm:text-lg">{s.title}</h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">{s.body}</p>
               </CardContent>
             </Card>
@@ -266,6 +273,7 @@ export function HowItWorks() {
         ))}
       </ol>
     </Section>
+
   );
 }
 
@@ -460,7 +468,7 @@ export function Testimonials() {
 
 export function Faq() {
   return (
-    <Section className="border-t border-border bg-card/40">
+    <Section id="faq" className="border-t border-border bg-card/40">
       <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <SectionHeading
           align="left"
@@ -493,7 +501,7 @@ export function FinalCta() {
             <BadgeCheck className="mr-1 h-3.5 w-3.5" /> Free forever plan
           </Badge>
           <h2 className="max-w-2xl text-balance text-3xl font-extrabold sm:text-4xl">
-            Your next role starts with a better first impression
+            Ready to build your career?
           </h2>
           <p className="max-w-xl text-pretty text-muted-foreground">
             Build your resume, publish your portfolio and get matched — all in one afternoon.
@@ -501,7 +509,7 @@ export function FinalCta() {
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild variant="hero" size="xl">
               <Link to="/auth/register">
-                Create your free account <ArrowRight />
+                Start Free <ArrowRight />
               </Link>
             </Button>
             <Button asChild variant="outline" size="xl">
