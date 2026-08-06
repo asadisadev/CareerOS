@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const links = [
-  { label: "Features", to: "/features" },
-  { label: "Templates", to: "/templates" },
-  { label: "Pricing", to: "/pricing" },
-  { label: "How it works", to: "/how-it-works" },
-];
+  { label: "Features", to: "/", hash: "features" },
+  { label: "Resume Builder", to: "/", hash: "resume-builder" },
+  { label: "Portfolio Builder", to: "/", hash: "portfolio-builder" },
+  { label: "AI Career Coach", to: "/", hash: "ai-coach" },
+  { label: "Pricing", to: "/pricing", hash: undefined },
+  { label: "FAQ", to: "/", hash: "faq" },
+] as const;
 
 export function SiteNavbar() {
   const [open, setOpen] = useState(false);
@@ -20,19 +22,19 @@ export function SiteNavbar() {
     <header className="sticky top-0 z-50 border-b border-border/70 glass">
       <nav
         aria-label="Main"
-        className="mx-auto flex h-16 w-full max-w-7xl items-center gap-6 px-5 lg:px-8"
+        className="mx-auto flex h-16 w-full max-w-7xl items-center gap-4 px-5 lg:px-8"
       >
         <Link to="/" className="min-w-0 shrink-0" aria-label="CareerOS AI home">
           <Logo />
         </Link>
 
-        <ul className="hidden flex-1 items-center gap-1 md:flex">
+        <ul className="hidden flex-1 items-center gap-0.5 lg:flex">
           {links.map((link) => (
-            <li key={link.to}>
+            <li key={link.label}>
               <Link
                 to={link.to}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-                activeProps={{ className: "text-foreground bg-accent" }}
+                hash={link.hash}
+                className="rounded-lg px-2.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
               >
                 {link.label}
               </Link>
@@ -43,15 +45,15 @@ export function SiteNavbar() {
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
           <Button asChild variant="ghost" className="hidden sm:inline-flex">
-            <Link to="/auth/login">Sign in</Link>
+            <Link to="/auth/login">Login</Link>
           </Button>
           <Button asChild variant="hero" className="hidden sm:inline-flex">
-            <Link to="/auth/register">Get started free</Link>
+            <Link to="/auth/register">Get Started Free</Link>
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="md:hidden" aria-label="Open menu">
+              <Button variant="outline" size="icon" className="lg:hidden" aria-label="Open menu">
                 <Menu />
               </Button>
             </SheetTrigger>
@@ -69,9 +71,10 @@ export function SiteNavbar() {
               </div>
               <ul className="space-y-1">
                 {links.map((link) => (
-                  <li key={link.to}>
+                  <li key={link.label}>
                     <Link
                       to={link.to}
+                      hash={link.hash}
                       onClick={() => setOpen(false)}
                       className="block rounded-xl px-3 py-3 text-base font-medium hover:bg-accent"
                     >
@@ -82,10 +85,10 @@ export function SiteNavbar() {
               </ul>
               <div className="mt-8 grid gap-2">
                 <Button asChild variant="outline" size="lg" onClick={() => setOpen(false)}>
-                  <Link to="/auth/login">Sign in</Link>
+                  <Link to="/auth/login">Login</Link>
                 </Button>
                 <Button asChild variant="hero" size="lg" onClick={() => setOpen(false)}>
-                  <Link to="/auth/register">Get started free</Link>
+                  <Link to="/auth/register">Get Started Free</Link>
                 </Button>
               </div>
             </SheetContent>
