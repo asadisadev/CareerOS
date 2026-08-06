@@ -468,7 +468,7 @@ export function Testimonials() {
 
 export function Faq() {
   return (
-    <Section className="border-t border-border bg-card/40">
+    <Section id="faq" className="border-t border-border bg-card/40">
       <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <SectionHeading
           align="left"

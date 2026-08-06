@@ -11,7 +11,7 @@ const links = [
   { label: "Resume Builder", to: "/", hash: "resume-builder" },
   { label: "Portfolio Builder", to: "/", hash: "portfolio-builder" },
   { label: "AI Career Coach", to: "/", hash: "ai-coach" },
-  { label: "Pricing", to: "/pricing", hash: undefined },
+  { label: "Pricing", to: "/pricing", hash: "pricing" },
   { label: "FAQ", to: "/", hash: "faq" },
 ] as const;
 
