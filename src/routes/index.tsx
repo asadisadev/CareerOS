@@ -38,13 +38,18 @@ function LandingPage() {
       <SiteNavbar />
       <main>
         <Hero />
+        <TrustedBy />
+        <Problem />
         <Features />
         <HowItWorks />
-        <Templates />
+        <PortfolioShowcase />
+        <ResumeShowcase />
+        <AiDemo />
         <Pricing />
         <Testimonials />
         <Faq />
         <FinalCta />
+
       </main>
       <SiteFooter />
     </div>
