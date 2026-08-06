@@ -501,7 +501,7 @@ export function FinalCta() {
             <BadgeCheck className="mr-1 h-3.5 w-3.5" /> Free forever plan
           </Badge>
           <h2 className="max-w-2xl text-balance text-3xl font-extrabold sm:text-4xl">
-            Your next role starts with a better first impression
+            Ready to build your career?
           </h2>
           <p className="max-w-xl text-pretty text-muted-foreground">
             Build your resume, publish your portfolio and get matched — all in one afternoon.
@@ -509,7 +509,7 @@ export function FinalCta() {
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild variant="hero" size="xl">
               <Link to="/auth/register">
-                Create your free account <ArrowRight />
+                Start Free <ArrowRight />
               </Link>
             </Button>
             <Button asChild variant="outline" size="xl">
