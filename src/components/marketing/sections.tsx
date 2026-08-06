@@ -12,6 +12,7 @@ import {
   LayoutTemplate,
   LineChart,
   Mail,
+  PlayCircle,
   ShieldCheck,
   Sparkles,
   Star,
