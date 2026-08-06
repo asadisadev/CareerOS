@@ -154,12 +154,12 @@ export function PortfolioShowcase() {
           <motion.div key={t.name} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.04 }}>
             <Card className="group h-full overflow-hidden rounded-3xl shadow-soft transition-all hover:-translate-y-1.5 hover:shadow-lift">
               <div className={`relative aspect-[16/10] overflow-hidden border-b border-border bg-gradient-to-br ${t.swatch} p-5`}>
-                <div className="h-full rounded-2xl bg-card/90 p-4 shadow-lift backdrop-blur">
-                  <div className="h-3 w-2/3 rounded bg-foreground/80" />
-                  <div className="mt-2 h-1.5 w-1/2 rounded bg-muted-foreground/40" />
-                  <div className="mt-4 grid grid-cols-3 gap-1.5">
+                <div className="flex h-full flex-col overflow-hidden rounded-2xl bg-card/90 p-4 shadow-lift backdrop-blur">
+                  <div className="h-2.5 w-2/3 shrink-0 rounded bg-foreground/80" />
+                  <div className="mt-2 h-1.5 w-1/2 shrink-0 rounded bg-muted-foreground/40" />
+                  <div className="mt-3 grid min-h-0 flex-1 grid-cols-3 grid-rows-2 gap-1.5">
                     {[0, 1, 2, 3, 4, 5].map((k) => (
-                      <span key={k} className="aspect-square rounded-md bg-primary/15" />
+                      <span key={k} className="rounded-md bg-primary/15" />
                     ))}
                   </div>
                 </div>
