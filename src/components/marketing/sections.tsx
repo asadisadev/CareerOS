@@ -208,8 +208,8 @@ export function Features() {
   return (
     <Section id="features" className="border-t border-border">
       <SectionHeading
-        eyebrow="Platform"
-        title="One workspace for your entire career"
+        eyebrow="The solution"
+        title="CareerOS AI solves all of it, in one place"
         description="Eight connected modules that share the same profile, so every improvement compounds across your resume, portfolio and applications."
       />
       <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
