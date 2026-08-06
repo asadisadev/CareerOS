@@ -67,22 +67,25 @@ export function Hero() {
             <span className="text-muted-foreground">· v2.0</span>
           </span>
           <h1 className="text-balance text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Build. Showcase. <span className="text-gradient">Get Hired.</span>
+            Build Your Career <span className="text-gradient">with AI</span>
           </h1>
           <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            CareerOS AI turns your experience into an ATS-ready resume, a hosted portfolio and a
-            targeted job pipeline — guided end to end by an AI career coach.
+            Create ATS-friendly resumes, generate professional portfolios, improve your career, and
+            get hired faster using AI.
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Button asChild variant="hero" size="xl">
               <Link to="/auth/register">
-                Start free — no card <ArrowRight />
+                Start Free <ArrowRight />
               </Link>
             </Button>
             <Button asChild variant="outline" size="xl">
-              <Link to="/app">Explore live demo</Link>
+              <Link to="/how-it-works">
+                <PlayCircle /> Watch Demo
+              </Link>
             </Button>
           </div>
+
           <dl className="grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-7">
             {[
               { k: "142k", v: "Resumes optimized" },
