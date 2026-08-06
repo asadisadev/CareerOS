@@ -153,7 +153,7 @@ export function PortfolioShowcase() {
         {portfolioPresets.map((t, i) => (
           <motion.div key={t.name} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.04 }}>
             <Card className="group h-full overflow-hidden rounded-3xl shadow-soft transition-all hover:-translate-y-1.5 hover:shadow-lift">
-              <div className={`relative aspect-[16/10] border-b border-border bg-gradient-to-br ${t.swatch} p-5`}>
+              <div className={`relative aspect-[16/10] overflow-hidden border-b border-border bg-gradient-to-br ${t.swatch} p-5`}>
                 <div className="h-full rounded-2xl bg-card/90 p-4 shadow-lift backdrop-blur">
                   <div className="h-3 w-2/3 rounded bg-foreground/80" />
                   <div className="mt-2 h-1.5 w-1/2 rounded bg-muted-foreground/40" />
