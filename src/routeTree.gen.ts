@@ -32,6 +32,7 @@ import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as AuthResetPasswordRouteImport } from './routes/auth.reset-password'
 import { Route as AuthVerifyEmailRouteImport } from './routes/auth.verify-email'
 import { Route as OnboardingIndexRouteImport } from './routes/onboarding.index'
+import { Route as OnboardingInterviewRouteImport } from './routes/onboarding.interview'
 import { Route as OnboardingWelcomeRouteImport } from './routes/onboarding.welcome'
 
 const IndexRoute = IndexRouteImport.update({
@@ -149,6 +150,11 @@ const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
   path: '/',
   getParentRoute: () => OnboardingRoute,
 } as any)
+const OnboardingInterviewRoute = OnboardingInterviewRouteImport.update({
+  id: '/interview',
+  path: '/interview',
+  getParentRoute: () => OnboardingRoute,
+} as any)
 const OnboardingWelcomeRoute = OnboardingWelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
@@ -177,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
+  '/onboarding/interview': typeof OnboardingInterviewRoute
   '/onboarding/welcome': typeof OnboardingWelcomeRoute
   '/app/': typeof AppIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
@@ -201,6 +208,7 @@ export interface FileRoutesByTo {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
+  '/onboarding/interview': typeof OnboardingInterviewRoute
   '/onboarding/welcome': typeof OnboardingWelcomeRoute
   '/app': typeof AppIndexRoute
   '/onboarding': typeof OnboardingIndexRoute
@@ -228,6 +236,7 @@ export interface FileRoutesById {
   '/auth/register': typeof AuthRegisterRoute
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
+  '/onboarding/interview': typeof OnboardingInterviewRoute
   '/onboarding/welcome': typeof OnboardingWelcomeRoute
   '/app/': typeof AppIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
@@ -256,6 +265,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset-password'
     | '/auth/verify-email'
+    | '/onboarding/interview'
     | '/onboarding/welcome'
     | '/app/'
     | '/onboarding/'
@@ -280,6 +290,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset-password'
     | '/auth/verify-email'
+    | '/onboarding/interview'
     | '/onboarding/welcome'
     | '/app'
     | '/onboarding'
@@ -306,6 +317,7 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/reset-password'
     | '/auth/verify-email'
+    | '/onboarding/interview'
     | '/onboarding/welcome'
     | '/app/'
     | '/onboarding/'
@@ -485,6 +497,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingIndexRouteImport
       parentRoute: typeof OnboardingRoute
     }
+    '/onboarding/interview': {
+      id: '/onboarding/interview'
+      path: '/interview'
+      fullPath: '/onboarding/interview'
+      preLoaderRoute: typeof OnboardingInterviewRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
     '/onboarding/welcome': {
       id: '/onboarding/welcome'
       path: '/welcome'
@@ -540,11 +559,13 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface OnboardingRouteChildren {
+  OnboardingInterviewRoute: typeof OnboardingInterviewRoute
   OnboardingWelcomeRoute: typeof OnboardingWelcomeRoute
   OnboardingIndexRoute: typeof OnboardingIndexRoute
 }
 
 const OnboardingRouteChildren: OnboardingRouteChildren = {
+  OnboardingInterviewRoute: OnboardingInterviewRoute,
   OnboardingWelcomeRoute: OnboardingWelcomeRoute,
   OnboardingIndexRoute: OnboardingIndexRoute,
 }
