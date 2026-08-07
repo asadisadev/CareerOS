@@ -1,9 +1,11 @@
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { AuthError, AuthFade, AuthHeading } from "@/components/auth/auth-shell";
 import { AuthDivider, OAuthButtons } from "@/components/auth/oauth-buttons";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -31,6 +33,9 @@ export const Route = createFileRoute("/auth/login")({
   component: LoginPage,
 });
 
+const DEMO_EMAIL = "ayesha.malik@careeros.ai";
+const DEMO_PASSWORD = "careeros2026";
+
 const schema = z.object({
   email: z.string().trim().email({ message: "Enter a valid email address" }).max(255),
   password: z.string().min(8, { message: "Password must be at least 8 characters" }).max(128),
@@ -40,30 +45,38 @@ const schema = z.object({
 function LoginPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: { email: "ayesha.malik@careeros.ai", password: "careeros2026", remember: true },
+    defaultValues: { email: DEMO_EMAIL, password: DEMO_PASSWORD, remember: true },
   });
 
-  async function onSubmit() {
+  async function onSubmit(values: z.infer<typeof schema>) {
+    setError(null);
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 700));
+    await new Promise((r) => setTimeout(r, 800));
     setLoading(false);
+
+    if (values.email !== DEMO_EMAIL || values.password !== DEMO_PASSWORD) {
+      setError("Those credentials don't match our demo account. Try the prefilled details.");
+      return;
+    }
+
     toast.success("Welcome back, Ayesha");
     navigate({ to: "/app" });
   }
 
   return (
-    <div className="space-y-7">
-      <div className="space-y-2">
-        <h1 className="font-display text-2xl font-extrabold">Sign in to CareerOS AI</h1>
-        <p className="text-sm text-muted-foreground">
-          Pick up where you left off — your ATS score is waiting.
-        </p>
-      </div>
+    <AuthFade>
+      <AuthHeading
+        title="Sign in to CareerOS AI"
+        subtitle="Pick up where you left off — your ATS score is waiting."
+      />
 
       <OAuthButtons label="Sign in" />
       <AuthDivider />
+
+      <AuthError message={error} />
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -114,13 +127,19 @@ function LoginPage() {
                   />
                 </FormControl>
                 <FormLabel htmlFor="remember" className="text-sm font-normal text-muted-foreground">
-                  Keep me signed in for 30 days
+                  Remember me for 30 days
                 </FormLabel>
               </FormItem>
             )}
           />
           <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>
-            {loading ? "Signing in…" : "Sign in"}
+            {loading ? (
+              <>
+                <Loader2 className="animate-spin" /> Signing in…
+              </>
+            ) : (
+              "Sign in"
+            )}
           </Button>
         </form>
       </Form>
@@ -131,6 +150,6 @@ function LoginPage() {
           Create a free account
         </Link>
       </p>
-    </div>
+    </AuthFade>
   );
 }
