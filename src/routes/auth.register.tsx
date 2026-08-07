@@ -1,10 +1,14 @@
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "motion/react";
+import { Check, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { AuthError, AuthFade, AuthHeading } from "@/components/auth/auth-shell";
 import { AuthDivider, OAuthButtons } from "@/components/auth/oauth-buttons";
+import { countries } from "@/data/onboarding";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -18,6 +22,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Route = createFileRoute("/auth/register")({
   head: () => ({
@@ -39,17 +50,24 @@ export const Route = createFileRoute("/auth/register")({
   component: RegisterPage,
 });
 
-const schema = z.object({
-  name: z.string().trim().min(2, { message: "Enter your full name" }).max(80),
-  email: z.string().trim().email({ message: "Enter a valid email address" }).max(255),
-  password: z
-    .string()
-    .min(8, { message: "Use at least 8 characters" })
-    .max(128)
-    .regex(/[A-Z]/, { message: "Include one uppercase letter" })
-    .regex(/[0-9]/, { message: "Include one number" }),
-  terms: z.literal(true, { errorMap: () => ({ message: "Please accept the terms" }) }),
-});
+const schema = z
+  .object({
+    name: z.string().trim().min(2, { message: "Enter your full name" }).max(80),
+    email: z.string().trim().email({ message: "Enter a valid email address" }).max(255),
+    password: z
+      .string()
+      .min(8, { message: "Use at least 8 characters" })
+      .max(128)
+      .regex(/[A-Z]/, { message: "Include one uppercase letter" })
+      .regex(/[0-9]/, { message: "Include one number" }),
+    confirm: z.string().min(8, { message: "Confirm your password" }).max(128),
+    country: z.string().min(1, { message: "Select your country" }),
+    terms: z.literal(true, { errorMap: () => ({ message: "Please accept the terms" }) }),
+  })
+  .refine((v) => v.password === v.confirm, {
+    message: "Passwords do not match",
+    path: ["confirm"],
+  });
 
 function strengthOf(password: string) {
   let score = 0;
@@ -60,36 +78,79 @@ function strengthOf(password: string) {
   return Math.min(score, 100);
 }
 
+function strengthLabel(score: number) {
+  if (score < 40) return "Weak";
+  if (score < 70) return "Fair";
+  if (score < 100) return "Strong";
+  return "Excellent";
+}
+
 function RegisterPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", password: "", terms: true },
+    defaultValues: { name: "", email: "", password: "", confirm: "", country: "", terms: true },
   });
 
   const password = form.watch("password");
   const strength = strengthOf(password ?? "");
 
-  async function onSubmit() {
+  async function onSubmit(values: z.infer<typeof schema>) {
+    setError(null);
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
+    await new Promise((r) => setTimeout(r, 900));
     setLoading(false);
+
+    if (values.email.endsWith("@taken.com")) {
+      setError("An account with this email already exists. Try signing in instead.");
+      return;
+    }
+
+    setSuccess(true);
     toast.success("Account created", { description: "Check your inbox to verify your email." });
-    navigate({ to: "/auth/verify-email" });
+    setTimeout(() => navigate({ to: "/auth/verify-email" }), 1400);
+  }
+
+  if (success) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="space-y-6 text-center"
+      >
+        <motion.span
+          initial={{ scale: 0.4, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 220, damping: 16 }}
+          className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-success/15 text-success"
+        >
+          <Check className="h-7 w-7" />
+        </motion.span>
+        <div className="space-y-2">
+          <h1 className="font-display text-2xl font-extrabold">Account created</h1>
+          <p className="text-sm text-muted-foreground">
+            Taking you to email verification…
+          </p>
+        </div>
+        <Progress value={100} className="h-1.5" />
+      </motion.div>
+    );
   }
 
   return (
-    <div className="space-y-7">
-      <div className="space-y-2">
-        <h1 className="font-display text-2xl font-extrabold">Create your account</h1>
-        <p className="text-sm text-muted-foreground">
-          Free forever plan. No credit card, no commitments.
-        </p>
-      </div>
+    <AuthFade>
+      <AuthHeading
+        title="Create your account"
+        subtitle="Free forever plan. No credit card, no commitments."
+      />
 
       <OAuthButtons label="Sign up" />
       <AuthDivider />
+
+      <AuthError message={error} />
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -129,9 +190,47 @@ function RegisterPage() {
                   <Input type="password" autoComplete="new-password" placeholder="••••••••" {...field} />
                 </FormControl>
                 <Progress value={strength} className="h-1.5" />
-                <FormDescription className="text-xs">
-                  8+ characters with an uppercase letter and a number.
+                <FormDescription className="flex items-center justify-between text-xs">
+                  <span>8+ characters with an uppercase letter and a number.</span>
+                  {password ? <span className="font-medium">{strengthLabel(strength)}</span> : null}
                 </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="confirm"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm password</FormLabel>
+                <FormControl>
+                  <Input type="password" autoComplete="new-password" placeholder="••••••••" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="country"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Country</FormLabel>
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your country" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {countries.map((c) => (
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -158,7 +257,13 @@ function RegisterPage() {
             )}
           />
           <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>
-            {loading ? "Creating account…" : "Create free account"}
+            {loading ? (
+              <>
+                <Loader2 className="animate-spin" /> Creating account…
+              </>
+            ) : (
+              "Create free account"
+            )}
           </Button>
         </form>
       </Form>
@@ -169,6 +274,6 @@ function RegisterPage() {
           Sign in
         </Link>
       </p>
-    </div>
+    </AuthFade>
   );
 }
