@@ -220,15 +220,15 @@ function InterviewPage() {
         <div ref={endRef} />
       </div>
 
-      <AnimatePresence mode="wait">
-        {!typing ? (
-          <motion.div
-            key={question.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="sticky bottom-0 space-y-3 bg-background/85 pb-4 pt-3 backdrop-blur"
-          >
+      <div
+        className={cn(
+          "sticky bottom-0 space-y-3 bg-background/85 pb-4 pt-3 backdrop-blur transition-opacity duration-300",
+          typing && "pointer-events-none opacity-40",
+        )}
+      >
+        {(
+          <>
+
             {question.options ? (
               <div className="flex flex-wrap gap-2">
                 {question.options.map((option) => (
