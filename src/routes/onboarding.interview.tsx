@@ -226,8 +226,7 @@ function InterviewPage() {
           typing && "pointer-events-none opacity-40",
         )}
       >
-        {(
-          <>
+
 
             {question.options ? (
               <div className="flex flex-wrap gap-2">
