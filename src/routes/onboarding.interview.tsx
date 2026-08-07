@@ -312,9 +312,8 @@ function InterviewPage() {
             <p className="text-center text-[11px] text-muted-foreground">
               {progress}% answered · you can edit any answer by tapping it
             </p>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      </div>
+
     </div>
   );
 }
