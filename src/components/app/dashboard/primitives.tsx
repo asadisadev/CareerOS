@@ -17,7 +17,7 @@ export function AnimatedCounter({
 }: {
   value: number;
   duration?: number;
-  suffix?: string;
+  suffix?: string | undefined;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
