@@ -171,7 +171,7 @@ export function QuickActions() {
   return (
     <Reveal>
       <DashCard title="Quick actions" description="Jump straight into your next move.">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2">
           {quickActions.map((a) => (
             <motion.div key={a.label} whileHover={{ y: -3 }} transition={{ type: "spring", stiffness: 300, damping: 22 }}>
               <Link
@@ -196,7 +196,7 @@ export function Achievements() {
   return (
     <Reveal delay={0.05}>
       <DashCard title="Achievements" description="Milestones you unlocked on CareerOS.">
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2">
           {achievements.map((a) => (
             <div
               key={a.label}

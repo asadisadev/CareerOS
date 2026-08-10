@@ -238,7 +238,7 @@ export function JobMatches() {
           </Button>
         }
       >
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4 xl:grid-cols-2">
           {matchJobs.map((job) => (
             <motion.article
               key={job.id}
