@@ -1,18 +1,40 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
-import { activity, aiSuggestions, jobs, scores } from "@/data/mock";
-import { PageHeader } from "@/components/common/page-header";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import {
+  Achievements,
+  DashboardFooter,
+  LearningRoadmap,
+  PortfolioAnalytics,
+  QuickActions,
+  ResumeAnalytics,
+  SkillGapAnalysis,
+} from "@/components/app/dashboard/sections-bottom";
+import {
+  CoachCard,
+  DailyInsight,
+  JobMatches,
+  OverviewCards,
+  RecentActivity,
+  UpcomingAndGoals,
+  WelcomeSection,
+} from "@/components/app/dashboard/sections-top";
+import { CardSkeleton } from "@/components/app/dashboard/primitives";
+import { goal, upcomingEvents } from "@/data/dashboard";
 
 export const Route = createFileRoute("/app/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — CareerOS AI" },
-      { name: "description", content: "Your resume score, ATS health, job matches and AI suggestions at a glance." },
-      { property: "og:title", content: "Dashboard — CareerOS AI" },
-      { property: "og:description", content: "Track your career momentum in one workspace." },
+      { title: "Career dashboard — CareerOS AI" },
+      {
+        name: "description",
+        content:
+          "Your personal AI career workspace: resume and ATS scores, job matches, skill gaps, analytics and daily AI insights.",
+      },
+      { property: "og:title", content: "Career dashboard — CareerOS AI" },
+      {
+        property: "og:description",
+        content: "Track resume, portfolio, ATS, matches and learning progress in one premium workspace.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -21,88 +43,59 @@ export const Route = createFileRoute("/app/")({
 });
 
 function DashboardPage() {
-  const metrics = [
-    { label: "Resume score", value: scores.resume },
-    { label: "ATS score", value: scores.ats },
-    { label: "Portfolio views", value: scores.portfolio },
-    { label: "Active matches", value: jobs.length },
-  ];
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 450);
+    return () => clearTimeout(t);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <CardSkeleton rows={2} />
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <CardSkeleton key={i} rows={1} />
+          ))}
+        </div>
+        <CardSkeleton rows={4} />
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-8">
-      <PageHeader
-        title="Welcome back, Ayesha"
-        description="Here's where your job search stands today."
-      />
+    <div className="space-y-6 lg:space-y-8">
+      <WelcomeSection />
+      <DailyInsight />
+      <OverviewCards />
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {metrics.map((m) => (
-          <Card key={m.label}>
-            <CardContent className="pt-6">
-              <p className="text-sm text-muted-foreground">{m.label}</p>
-              <p className="mt-2 font-display text-3xl font-extrabold">{m.value}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardHeader className="flex-row items-center justify-between">
-            <CardTitle>Top job matches</CardTitle>
-            <Button asChild variant="ghost" size="sm">
-              <Link to="/app">
-                View all <ArrowUpRight />
-              </Link>
-            </Button>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {jobs.slice(0, 5).map((job) => (
-              <div
-                key={job.id}
-                className="flex items-center justify-between gap-4 rounded-xl border border-border p-4"
-              >
-                <div className="min-w-0">
-                  <p className="truncate font-semibold">{job.title}</p>
-                  <p className="truncate text-sm text-muted-foreground">
-                    {job.company} · {job.location}
-                  </p>
-                </div>
-                <Badge variant="secondary" className="shrink-0">
-                  {job.match}% match
-                </Badge>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        <div className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>AI suggestions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {aiSuggestions.map((s, i) => (
-                <p key={i} className="text-sm text-muted-foreground">
-                  {typeof s === "string" ? s : JSON.stringify(s)}
-                </p>
-              ))}
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent activity</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {activity.map((a, i) => (
-                <p key={i} className="text-sm text-muted-foreground">
-                  {typeof a === "string" ? a : JSON.stringify(a)}
-                </p>
-              ))}
-            </CardContent>
-          </Card>
+      <div className="grid gap-4 lg:grid-cols-3 lg:gap-6">
+        <div className="lg:col-span-2">
+          <JobMatches />
+        </div>
+        <div className="space-y-4 lg:space-y-6">
+          <CoachCard />
+          <RecentActivity />
         </div>
       </div>
+
+      <SkillGapAnalysis />
+
+      <div className="grid gap-4 lg:grid-cols-2 lg:gap-6">
+        <PortfolioAnalytics />
+        <ResumeAnalytics />
+      </div>
+
+      <UpcomingAndGoals events={upcomingEvents} goal={goal} />
+
+      <div className="grid gap-4 lg:grid-cols-2 lg:gap-6">
+        <QuickActions />
+        <Achievements />
+      </div>
+
+      <LearningRoadmap />
+      <DashboardFooter />
     </div>
   );
 }

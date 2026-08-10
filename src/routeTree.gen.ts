@@ -20,11 +20,17 @@ import { Route as TemplatesRouteImport } from './routes/templates'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAdminRouteImport } from './routes/app.admin'
 import { Route as AppAnalyticsRouteImport } from './routes/app.analytics'
+import { Route as AppApplicationsRouteImport } from './routes/app.applications'
+import { Route as AppAtsRouteImport } from './routes/app.ats'
 import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppCoachRouteImport } from './routes/app.coach'
+import { Route as AppHelpRouteImport } from './routes/app.help'
+import { Route as AppInterviewRouteImport } from './routes/app.interview'
 import { Route as AppJobsRouteImport } from './routes/app.jobs'
+import { Route as AppLinkedinRouteImport } from './routes/app.linkedin'
 import { Route as AppPortfolioRouteImport } from './routes/app.portfolio'
 import { Route as AppResumeRouteImport } from './routes/app.resume'
+import { Route as AppRoadmapRouteImport } from './routes/app.roadmap'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth.forgot-password'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
@@ -90,6 +96,16 @@ const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => AppRoute,
 } as any)
+const AppApplicationsRoute = AppApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAtsRoute = AppAtsRouteImport.update({
+  id: '/ats',
+  path: '/ats',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppBillingRoute = AppBillingRouteImport.update({
   id: '/billing',
   path: '/billing',
@@ -100,9 +116,24 @@ const AppCoachRoute = AppCoachRouteImport.update({
   path: '/coach',
   getParentRoute: () => AppRoute,
 } as any)
+const AppHelpRoute = AppHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInterviewRoute = AppInterviewRouteImport.update({
+  id: '/interview',
+  path: '/interview',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppJobsRoute = AppJobsRouteImport.update({
   id: '/jobs',
   path: '/jobs',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLinkedinRoute = AppLinkedinRouteImport.update({
+  id: '/linkedin',
+  path: '/linkedin',
   getParentRoute: () => AppRoute,
 } as any)
 const AppPortfolioRoute = AppPortfolioRouteImport.update({
@@ -113,6 +144,11 @@ const AppPortfolioRoute = AppPortfolioRouteImport.update({
 const AppResumeRoute = AppResumeRouteImport.update({
   id: '/resume',
   path: '/resume',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRoadmapRoute = AppRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
@@ -172,11 +208,17 @@ export interface FileRoutesByFullPath {
   '/templates': typeof TemplatesRoute
   '/app/admin': typeof AppAdminRoute
   '/app/analytics': typeof AppAnalyticsRoute
+  '/app/applications': typeof AppApplicationsRoute
+  '/app/ats': typeof AppAtsRoute
   '/app/billing': typeof AppBillingRoute
   '/app/coach': typeof AppCoachRoute
+  '/app/help': typeof AppHelpRoute
+  '/app/interview': typeof AppInterviewRoute
   '/app/jobs': typeof AppJobsRoute
+  '/app/linkedin': typeof AppLinkedinRoute
   '/app/portfolio': typeof AppPortfolioRoute
   '/app/resume': typeof AppResumeRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
@@ -197,11 +239,17 @@ export interface FileRoutesByTo {
   '/templates': typeof TemplatesRoute
   '/app/admin': typeof AppAdminRoute
   '/app/analytics': typeof AppAnalyticsRoute
+  '/app/applications': typeof AppApplicationsRoute
+  '/app/ats': typeof AppAtsRoute
   '/app/billing': typeof AppBillingRoute
   '/app/coach': typeof AppCoachRoute
+  '/app/help': typeof AppHelpRoute
+  '/app/interview': typeof AppInterviewRoute
   '/app/jobs': typeof AppJobsRoute
+  '/app/linkedin': typeof AppLinkedinRoute
   '/app/portfolio': typeof AppPortfolioRoute
   '/app/resume': typeof AppResumeRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
@@ -225,11 +273,17 @@ export interface FileRoutesById {
   '/templates': typeof TemplatesRoute
   '/app/admin': typeof AppAdminRoute
   '/app/analytics': typeof AppAnalyticsRoute
+  '/app/applications': typeof AppApplicationsRoute
+  '/app/ats': typeof AppAtsRoute
   '/app/billing': typeof AppBillingRoute
   '/app/coach': typeof AppCoachRoute
+  '/app/help': typeof AppHelpRoute
+  '/app/interview': typeof AppInterviewRoute
   '/app/jobs': typeof AppJobsRoute
+  '/app/linkedin': typeof AppLinkedinRoute
   '/app/portfolio': typeof AppPortfolioRoute
   '/app/resume': typeof AppResumeRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/app/settings': typeof AppSettingsRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
@@ -254,11 +308,17 @@ export interface FileRouteTypes {
     | '/templates'
     | '/app/admin'
     | '/app/analytics'
+    | '/app/applications'
+    | '/app/ats'
     | '/app/billing'
     | '/app/coach'
+    | '/app/help'
+    | '/app/interview'
     | '/app/jobs'
+    | '/app/linkedin'
     | '/app/portfolio'
     | '/app/resume'
+    | '/app/roadmap'
     | '/app/settings'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -279,11 +339,17 @@ export interface FileRouteTypes {
     | '/templates'
     | '/app/admin'
     | '/app/analytics'
+    | '/app/applications'
+    | '/app/ats'
     | '/app/billing'
     | '/app/coach'
+    | '/app/help'
+    | '/app/interview'
     | '/app/jobs'
+    | '/app/linkedin'
     | '/app/portfolio'
     | '/app/resume'
+    | '/app/roadmap'
     | '/app/settings'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -306,11 +372,17 @@ export interface FileRouteTypes {
     | '/templates'
     | '/app/admin'
     | '/app/analytics'
+    | '/app/applications'
+    | '/app/ats'
     | '/app/billing'
     | '/app/coach'
+    | '/app/help'
+    | '/app/interview'
     | '/app/jobs'
+    | '/app/linkedin'
     | '/app/portfolio'
     | '/app/resume'
+    | '/app/roadmap'
     | '/app/settings'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -413,6 +485,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAnalyticsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/applications': {
+      id: '/app/applications'
+      path: '/applications'
+      fullPath: '/app/applications'
+      preLoaderRoute: typeof AppApplicationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ats': {
+      id: '/app/ats'
+      path: '/ats'
+      fullPath: '/app/ats'
+      preLoaderRoute: typeof AppAtsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/billing': {
       id: '/app/billing'
       path: '/billing'
@@ -427,11 +513,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCoachRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/help': {
+      id: '/app/help'
+      path: '/help'
+      fullPath: '/app/help'
+      preLoaderRoute: typeof AppHelpRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/interview': {
+      id: '/app/interview'
+      path: '/interview'
+      fullPath: '/app/interview'
+      preLoaderRoute: typeof AppInterviewRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/jobs': {
       id: '/app/jobs'
       path: '/jobs'
       fullPath: '/app/jobs'
       preLoaderRoute: typeof AppJobsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/linkedin': {
+      id: '/app/linkedin'
+      path: '/linkedin'
+      fullPath: '/app/linkedin'
+      preLoaderRoute: typeof AppLinkedinRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/portfolio': {
@@ -446,6 +553,13 @@ declare module '@tanstack/react-router' {
       path: '/resume'
       fullPath: '/app/resume'
       preLoaderRoute: typeof AppResumeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/roadmap': {
+      id: '/app/roadmap'
+      path: '/roadmap'
+      fullPath: '/app/roadmap'
+      preLoaderRoute: typeof AppRoadmapRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/settings': {
@@ -517,11 +631,17 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppAdminRoute: typeof AppAdminRoute
   AppAnalyticsRoute: typeof AppAnalyticsRoute
+  AppApplicationsRoute: typeof AppApplicationsRoute
+  AppAtsRoute: typeof AppAtsRoute
   AppBillingRoute: typeof AppBillingRoute
   AppCoachRoute: typeof AppCoachRoute
+  AppHelpRoute: typeof AppHelpRoute
+  AppInterviewRoute: typeof AppInterviewRoute
   AppJobsRoute: typeof AppJobsRoute
+  AppLinkedinRoute: typeof AppLinkedinRoute
   AppPortfolioRoute: typeof AppPortfolioRoute
   AppResumeRoute: typeof AppResumeRoute
+  AppRoadmapRoute: typeof AppRoadmapRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
 }
@@ -529,11 +649,17 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAdminRoute: AppAdminRoute,
   AppAnalyticsRoute: AppAnalyticsRoute,
+  AppApplicationsRoute: AppApplicationsRoute,
+  AppAtsRoute: AppAtsRoute,
   AppBillingRoute: AppBillingRoute,
   AppCoachRoute: AppCoachRoute,
+  AppHelpRoute: AppHelpRoute,
+  AppInterviewRoute: AppInterviewRoute,
   AppJobsRoute: AppJobsRoute,
+  AppLinkedinRoute: AppLinkedinRoute,
   AppPortfolioRoute: AppPortfolioRoute,
   AppResumeRoute: AppResumeRoute,
+  AppRoadmapRoute: AppRoadmapRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
 }
