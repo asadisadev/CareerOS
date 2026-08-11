@@ -89,7 +89,12 @@ export const resumeRepository = {
 
 export function useResumeLibrary() {
   const [resumes, setResumes] = useState<Resume[]>(() => resumeRepository.list());
-  useEffect(() => resumeRepository.subscribe(() => setResumes(resumeRepository.list())), []);
+  useEffect(() => {
+    const unsubscribe = resumeRepository.subscribe(() => setResumes(resumeRepository.list()));
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return { resumes, repository: resumeRepository };
 }
 
