@@ -13,6 +13,7 @@ import * as Icons from "lucide-react";
 import {
   PORTFOLIO_SECTION_LIBRARY,
   uid,
+  type PortfolioContent,
   type PortfolioSection,
   type PortfolioSectionKind,
 } from "@/data/portfolio";
@@ -38,7 +39,7 @@ function iconFor(name: string): LucideIcon {
 }
 
 /** Rough completion signal per section so the nav can show progress. */
-function sectionFilled(section: PortfolioSection, content: ReturnType<typeof useContentShape>): boolean {
+function sectionFilled(section: PortfolioSection, content: PortfolioContent): boolean {
   switch (section.kind) {
     case "hero":
       return Boolean(content.hero.headline && content.profile.fullName);
@@ -73,12 +74,6 @@ function sectionFilled(section: PortfolioSection, content: ReturnType<typeof use
     default:
       return Boolean(section.blocks?.length);
   }
-}
-
-// Helper type shim so `sectionFilled` stays readable.
-function useContentShape() {
-  const { portfolio } = usePortfolioEditor();
-  return portfolio.content;
 }
 
 export function SectionNav() {
