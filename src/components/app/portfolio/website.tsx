@@ -18,12 +18,7 @@ import {
   Phone,
   Quote,
 } from "lucide-react";
-import type {
-  Portfolio,
-  PortfolioSection,
-  PortfolioStyle,
-  PreviewDeviceWidth,
-} from "@/data/portfolio-view";
+import type { Portfolio, PortfolioSection, PortfolioSkill, PortfolioStyle } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
 export type Device = "desktop" | "tablet" | "mobile";
@@ -33,8 +28,6 @@ export const DEVICE_WIDTH: Record<Device, number> = {
   tablet: 834,
   mobile: 390,
 };
-
-export type { PreviewDeviceWidth };
 
 function radius(style: PortfolioStyle, scale = 1) {
   return `${style.borderRadius * scale}px`;
@@ -184,7 +177,7 @@ function Hero({ portfolio, index }: { portfolio: Portfolio; index: number }) {
   const initials =
     c.profile.fullName
       .split(" ")
-      .map((p) => p[0])
+      .map((part: string) => part[0])
       .filter(Boolean)
       .slice(0, 2)
       .join("") || "AI";
@@ -303,7 +296,7 @@ function About({ portfolio, index }: { portfolio: Portfolio; index: number }) {
 
 function Skills({ portfolio, index }: { portfolio: Portfolio; index: number }) {
   const { content: c, style } = portfolio;
-  const groups = c.skills.reduce<Record<string, typeof c.skills>>((acc, skill) => {
+  const groups = c.skills.reduce<Record<string, PortfolioSkill[]>>((acc, skill) => {
     (acc[skill.group] ??= []).push(skill);
     return acc;
   }, {});
@@ -915,7 +908,7 @@ function Nav({ portfolio }: { portfolio: Portfolio }) {
 }
 
 const RENDERERS: Partial<
-  Record<PortfolioSection["kind"], (props: { portfolio: Portfolio; index: number }) => JSX.Element>
+  Record<PortfolioSection["kind"], (props: { portfolio: Portfolio; index: number }) => React.ReactElement>
 > = {
   hero: Hero,
   about: About,
