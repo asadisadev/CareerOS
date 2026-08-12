@@ -93,7 +93,14 @@ export const portfolioRepository = {
 /** Subscribes a component to the mocked portfolio collection. */
 export function usePortfolioLibrary() {
   const [items, setItems] = useState<Portfolio[]>(() => portfolioRepository.list());
-  useEffect(() => portfolioRepository.subscribe(() => setItems([...portfolioRepository.list()])), []);
+  useEffect(() => {
+    const unsubscribe = portfolioRepository.subscribe(() =>
+      setItems([...portfolioRepository.list()]),
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return items;
 }
 
