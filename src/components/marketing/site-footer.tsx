@@ -1,6 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Github, Linkedin, Twitter, Youtube } from "lucide-react";
-import { Logo } from "@/components/brand/logo";
+import { Logo } from "../brand/logo";
 
 const groups = [
   {
@@ -39,7 +39,7 @@ const socials = [
   { label: "YouTube", icon: Youtube },
 ];
 
-export function SiteFooter() {
+export default function SiteFooter() {
   return (
     <footer className="border-t border-border bg-card/50">
       <div className="mx-auto grid w-full max-w-7xl gap-12 px-5 py-16 lg:grid-cols-[1.4fr_2fr] lg:px-8">

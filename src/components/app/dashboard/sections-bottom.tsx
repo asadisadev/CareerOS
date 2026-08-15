@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight, Lock, Sparkles, Trophy } from "lucide-react";
 import {
@@ -14,9 +14,9 @@ import {
 } from "recharts";
 import { toast } from "sonner";
 import { AnimatedCounter, DashCard, DynIcon, ProgressBar, Reveal } from "./primitives";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
+import { Card, CardContent } from "../../../components/ui/card";
 import {
   achievements,
   portfolioAnalytics,
@@ -24,8 +24,8 @@ import {
   resumeAnalytics,
   roadmap,
   skillGap,
-} from "@/data/dashboard";
-import { cn } from "@/lib/utils";
+} from "../../../data/dashboard";
+import { cn } from "../../../lib/utils";
 
 const tooltipStyle = {
   borderRadius: 12,

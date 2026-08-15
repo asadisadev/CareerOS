@@ -12,10 +12,10 @@ import {
   uid,
   type SectionKind,
   type SectionMeta,
-} from "@/data/resume";
-import { useResumeEditor } from "@/lib/resume-store";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+} from "../../../data/resume";
+import { useResumeEditor } from "../../../lib/resume-store";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,10 +23,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
-import { DynIcon } from "@/components/app/dashboard/primitives";
+} from "../../../components/ui/dropdown-menu";
+import { Progress } from "../../../components/ui/progress";
+import { cn } from "../../../lib/utils";
+import { DynIcon } from "../../../components/app/dashboard/primitives";
 import { DragHandle, IconButton, useDragReorder } from "./shared";
 
 export function SectionNav() {

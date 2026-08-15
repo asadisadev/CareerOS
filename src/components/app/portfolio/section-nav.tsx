@@ -16,10 +16,10 @@ import {
   type PortfolioContent,
   type PortfolioSection,
   type PortfolioSectionKind,
-} from "@/data/portfolio";
-import { usePortfolioEditor, usePortfolioPlan } from "@/lib/portfolio-store";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+} from "../../../data/portfolio";
+import { usePortfolioEditor, usePortfolioPlan } from "../../../lib/portfolio-store";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -27,11 +27,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { IconButton, useDragReorder } from "@/components/app/resume/shared";
-import { cn } from "@/lib/utils";
+} from "../../../components/ui/dialog";
+import { Input } from "../../../components/ui/input";
+import { ScrollArea } from "../../../components/ui/scroll-area";
+import { IconButton, useDragReorder } from "../../../components/app/resume/shared";
+import { cn } from "../../../lib/utils";
 
 function iconFor(name: string): LucideIcon {
   const map = Icons as unknown as Record<string, LucideIcon>;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import {
   Bell,
   Bot,
@@ -21,11 +21,11 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { Logo } from "@/components/brand/logo";
-import { ThemeToggle } from "@/components/common/theme-toggle";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Logo } from "../../components/brand/logo";
+import { ThemeToggle } from "../../components/common/theme-toggle";
+import { Avatar, AvatarFallback } from "../../components/ui/avatar";
+import { Badge } from "../../components/ui/badge";
+import { Button } from "../../components/ui/button";
 import {
   CommandDialog,
   CommandEmpty,
@@ -33,7 +33,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "../../components/ui/command";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,8 +41,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+} from "../../components/ui/dropdown-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover";
 import {
   Sidebar,
   SidebarContent,
@@ -57,10 +57,10 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { messages, notifications } from "@/data/dashboard";
-import { currentUser } from "@/data/mock";
-import { cn } from "@/lib/utils";
+} from "../../components/ui/sidebar";
+import { messages, notifications } from "../../data/dashboard";
+import { currentUser } from "../../data/mock";
+import { cn } from "../../lib/utils";
 
 const primaryNav = [
   { label: "Dashboard", to: "/app" as const, icon: LayoutDashboard },
@@ -131,7 +131,8 @@ function CommandPalette({ open, onOpenChange }: { open: boolean; onOpenChange: (
 }
 
 export function AppShell() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  // const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathname = useLocation().pathname;
   const [paletteOpen, setPaletteOpen] = useState(false);
   const unread = notifications.filter((n) => n.unread).length;
 

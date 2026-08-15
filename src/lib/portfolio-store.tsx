@@ -22,8 +22,8 @@ import {
   type Plan,
   type Portfolio,
   type ThemeId,
-} from "@/data/portfolio";
-import { CURRENT_PLAN } from "@/data/resume";
+} from "../data/portfolio";
+import { CURRENT_PLAN } from "../data/resume";
 
 type Listener = () => void;
 

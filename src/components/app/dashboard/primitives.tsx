@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useInView } from "motion/react";
 import * as Icons from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card";
+import { Skeleton } from "../../../components/ui/skeleton";
+import { cn } from "../../../lib/utils";
 
 export function DynIcon({ name, className }: { name: string; className?: string }) {
   const Comp = (Icons as unknown as Record<string, Icons.LucideIcon>)[name] ?? Icons.Circle;

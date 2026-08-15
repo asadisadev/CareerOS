@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import {
   ArrowRight,
@@ -18,19 +18,19 @@ import {
   Star,
   Wand2,
 } from "lucide-react";
-import { SectionHeading } from "@/components/common/section-heading";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { SectionHeading } from "../../components/common/section-heading";
+import { Avatar, AvatarFallback } from "../../components/ui/avatar";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { faqs, plans, portfolioThemes, resumeTemplates, testimonials } from "@/data/mock";
+} from "../../components/ui/accordion";
+import { Badge } from "../../components/ui/badge";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent } from "../../components/ui/card";
+import { Progress } from "../../components/ui/progress";
+import { faqs, plans, portfolioThemes, resumeTemplates, testimonials } from "../../data/mock";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -163,41 +163,49 @@ export function Hero() {
 
 const features = [
   {
+    id: "resume-builder",
     icon: FileText,
     title: "Resume Builder",
     body: "Structured editor, live preview, multiple templates, PDF export and inline AI rewrites.",
   },
   {
+    id: "portfolio-builder",
     icon: LayoutTemplate,
     title: "Portfolio Builder",
     body: "23 section types, drag-to-reorder, premium themes and responsive live preview.",
   },
   {
+    id: "ats-optimization",   // not linked from navbar, but you can add it
     icon: Gauge,
     title: "ATS Optimization",
     body: "Score formatting, keywords, grammar, achievements and skills against any job description.",
   },
   {
+    id: "ai-coach",
     icon: Bot,
     title: "AI Career Coach",
     body: "Grounded advice on your real documents: reviews, roadmaps and interview drills.",
   },
   {
+    id: "job-matching",
     icon: BriefcaseBusiness,
     title: "Job Matching",
     body: "Match scoring, skill-gap analysis, saved jobs and a full application tracker.",
   },
   {
+    id: "cover-letters",
     icon: Mail,
     title: "Cover Letters",
     body: "Role-specific letters generated from your resume and the target company's language.",
   },
   {
+    id: "portfolio-hosting",
     icon: Globe,
     title: "Portfolio Hosting",
     body: "Custom domains, automatic SSL, SEO metadata and a built-in blog engine.",
   },
   {
+    id: "career-analytics",
     icon: LineChart,
     title: "Career Analytics",
     body: "Track portfolio visits, resume views, application funnel and score progression.",
@@ -214,7 +222,12 @@ export function Features() {
       />
       <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {features.map((f, i) => (
-          <motion.div key={f.title} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.04 }}>
+          <motion.div
+            key={f.title}
+            id={f.id}   // 👈 add this line
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: i * 0.04 }}
+          >
             <Card className="group h-full rounded-2xl shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
               <CardContent className="space-y-3 p-6">
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary-soft text-primary transition-colors group-hover:bg-gradient-brand group-hover:text-primary-foreground">

@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import {
   ArrowRight,
@@ -15,11 +15,11 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
-import { SectionHeading } from "@/components/common/section-heading";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Section } from "@/components/marketing/sections";
+import { SectionHeading } from "../../components/common/section-heading";
+import { Badge } from "../../components/ui/badge";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent } from "../../components/ui/card";
+import { Section } from "../../components/marketing/sections";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },

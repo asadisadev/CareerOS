@@ -6,7 +6,7 @@
  * `mock*` async helpers for network calls and nothing else has to change.
  */
 
-import type { Plan } from "@/data/resume";
+import type { Plan } from "../data/resume";
 
 export type { Plan };
 

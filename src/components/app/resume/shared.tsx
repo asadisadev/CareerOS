@@ -1,13 +1,13 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { Check, GripVertical, Sparkles, X } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import { scoreTone } from "@/data/resume";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
+import { Label } from "../../../components/ui/label";
+import { Skeleton } from "../../../components/ui/skeleton";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
+import { cn } from "../../../lib/utils";
+import { scoreTone } from "../../../data/resume";
 
 const MONTHS = [
   "January",

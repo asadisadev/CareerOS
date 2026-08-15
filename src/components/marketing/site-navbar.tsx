@@ -1,21 +1,21 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Logo } from "@/components/brand/logo";
-import { ThemeToggle } from "@/components/common/theme-toggle";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Logo } from "../brand/logo";
+import { ThemeToggle } from "../common/theme-toggle";
+import { Button } from "../ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const links = [
-  { label: "Features", to: "/", hash: "features" },
-  { label: "Resume Builder", to: "/", hash: "resume-builder" },
-  { label: "Portfolio Builder", to: "/", hash: "portfolio-builder" },
-  { label: "AI Career Coach", to: "/", hash: "ai-coach" },
-  { label: "Pricing", to: "/pricing", hash: "pricing" },
-  { label: "FAQ", to: "/", hash: "faq" },
+  { label: "Features", to: "/#features" },
+  { label: "Resume Builder", to: "/#resume-builder" },
+  { label: "Portfolio Builder", to: "/#portfolio-builder" },
+  { label: "AI Career Coach", to: "/#ai-coach" },
+  { label: "Pricing", to: "/#pricing" },
+  { label: "FAQ", to: "/#faq" },
 ] as const;
 
-export function SiteNavbar() {
+export default function SiteNavbar() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -33,7 +33,6 @@ export function SiteNavbar() {
             <li key={link.label}>
               <Link
                 to={link.to}
-                hash={link.hash}
                 className="rounded-lg px-2.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
               >
                 {link.label}
@@ -74,7 +73,6 @@ export function SiteNavbar() {
                   <li key={link.label}>
                     <Link
                       to={link.to}
-                      hash={link.hash}
                       onClick={() => setOpen(false)}
                       className="block rounded-xl px-3 py-3 text-base font-medium hover:bg-accent"
                     >

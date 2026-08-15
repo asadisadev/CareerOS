@@ -26,27 +26,27 @@ import {
   type SkillCategory,
   type SkillItem,
   type SkillLevel,
-} from "@/data/resume";
-import { useResumeEditor } from "@/lib/resume-store";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
-import { Slider } from "@/components/ui/slider";
+} from "../../../data/resume";
+import { useResumeEditor } from "../../../lib/resume-store";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
+import { Input } from "../../../components/ui/input";
+import { Textarea } from "../../../components/ui/textarea";
+import { Switch } from "../../../components/ui/switch";
+import { Slider } from "../../../components/ui/slider";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../../../components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "../../../components/ui/dropdown-menu";
 import { AiSuggestion, EditorSectionShell, Field, IconButton, ItemCard, useDragReorder } from "./shared";
 
 const EMPLOYMENT_TYPES: EmploymentType[] = [

@@ -18,8 +18,8 @@ import {
   Phone,
   Quote,
 } from "lucide-react";
-import type { Portfolio, PortfolioSection, PortfolioSkill, PortfolioStyle } from "@/data/portfolio";
-import { cn } from "@/lib/utils";
+import type { Portfolio, PortfolioSection, PortfolioSkill, PortfolioStyle } from "../../../data/portfolio";
+import { cn } from "../../../lib/utils";
 
 export type Device = "desktop" | "tablet" | "mobile";
 

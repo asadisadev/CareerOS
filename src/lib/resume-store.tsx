@@ -22,7 +22,7 @@ import {
   uid,
   type Plan,
   type Resume,
-} from "@/data/resume";
+} from "../data/resume";
 
 /* ------------------------------------------------------------------ */
 /* Mock repository                                                     */

@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import {
   ArrowRight,
@@ -12,10 +12,10 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { AnimatedCounter, DashCard, DynIcon, ProgressBar, Reveal } from "./primitives";
-import { ScoreRing } from "@/components/common/score-ring";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { ScoreRing } from "../../../components/common/score-ring";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
+import { Card, CardContent } from "../../../components/ui/card";
 import {
   coachPromptChips,
   dailyInsight,
@@ -23,8 +23,8 @@ import {
   overviewMetrics,
   profile,
   timeline,
-} from "@/data/dashboard";
-import { cn } from "@/lib/utils";
+} from "../../../data/dashboard";
+import { cn } from "../../../lib/utils";
 
 function greeting(hour: number) {
   if (hour < 12) return "Good morning";

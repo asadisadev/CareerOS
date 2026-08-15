@@ -7,10 +7,10 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-import type { Resume, SectionMeta } from "@/data/resume";
+import type { Resume, SectionMeta } from "../../../data/resume";
 import { dateRange, formatResumeDate } from "./shared";
-import { cn } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "../../../lib/utils";
+import { Skeleton } from "../../../components/ui/skeleton";
 
 /** A4 at 96dpi. */
 const PAGE_WIDTH = 794;

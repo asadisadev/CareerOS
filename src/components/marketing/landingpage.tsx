@@ -1,0 +1,31 @@
+import {
+  Hero,
+  Features,
+  HowItWorks,
+  Templates,
+  Pricing,
+  Testimonials,
+  Faq,
+  FinalCta,
+} from "./sections";
+
+import SiteNavbar from "./site-navbar";
+import SiteFooter from "./site-footer";
+
+export default function LandingPage() {
+  return (
+    <>
+      {/* Optional: add a marketing navbar/header here */}
+      <SiteNavbar />
+      <Hero />
+      <Features />
+      <HowItWorks />
+      <Templates />
+      <Pricing />
+      <Testimonials />
+      <Faq />
+      <FinalCta />
+      <SiteFooter />
+    </>
+  );
+}
