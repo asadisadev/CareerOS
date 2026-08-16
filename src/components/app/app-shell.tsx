@@ -276,11 +276,14 @@ export function AppShell() {
                   className="ml-1 flex items-center gap-2 rounded-full p-0.5 pr-2 transition-colors hover:bg-accent"
                   aria-label="Account menu"
                 >
-                  <Avatar className="h-8 w-8">
+                  {/* <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-gradient-brand text-xs font-bold text-primary-foreground">
                       {currentUser.initials}
                     </AvatarFallback>
-                  </Avatar>
+                  </Avatar> */}
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white">
+    J
+  </div>
                   <span className="hidden text-sm font-medium sm:inline">{currentUser.name}</span>
                 </button>
               </DropdownMenuTrigger>

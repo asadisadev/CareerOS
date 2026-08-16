@@ -1,6 +1,6 @@
 export const profile = {
-  name: "Ayesha Malik",
-  firstName: "Ayesha",
+  name: "John",
+  firstName: "John",
   role: "Product Designer → Full Stack Developer",
   completion: 72,
 };
@@ -35,7 +35,7 @@ export const overviewMetrics: OverviewMetric[] = [
 
 export const timeline = [
   { title: "Resume updated", detail: "Senior Product Designer · v7 saved", time: "12m ago", tone: "info" as const, icon: "FileText" },
-  { title: "Portfolio published", detail: "ayesha.careeros.site is live", time: "2h ago", tone: "success" as const, icon: "Globe" },
+  { title: "Portfolio published", detail: "john.careeros.site is live", time: "2h ago", tone: "success" as const, icon: "Globe" },
   { title: "ATS score improved", detail: "82 → 91 after keyword pass", time: "5h ago", tone: "success" as const, icon: "ShieldCheck" },
   { title: "Applied to React Developer", detail: "Linear · via CareerOS one-click", time: "Yesterday", tone: "info" as const, icon: "Send" },
   { title: "Interview scheduled", detail: "Vercel · Aug 13, 4:00 PM PKT", time: "Yesterday", tone: "warning" as const, icon: "CalendarCheck" },

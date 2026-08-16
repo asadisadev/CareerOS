@@ -28,7 +28,7 @@ export const interviewQuestions: InterviewQuestion[] = [
     id: "name",
     prompt: "First things first — what's your name?",
     hint: "This is how your resume and portfolio will introduce you.",
-    placeholder: "Ayesha Malik",
+    placeholder: "John",
   },
   {
     id: "role",
@@ -138,7 +138,7 @@ export const interviewQuestions: InterviewQuestion[] = [
   {
     id: "website",
     prompt: "Personal website?",
-    placeholder: "ayesha.dev",
+    placeholder: "john.dev",
     optional: true,
   },
   {

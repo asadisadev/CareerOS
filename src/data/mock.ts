@@ -1,9 +1,9 @@
 export type Trend = { label: string; value: number };
 
 export const currentUser = {
-  name: "Ayesha Malik",
+  name: "John",
   role: "Product Designer",
-  email: "ayesha.malik@careeros.ai",
+  email: "john.dave@careeros.ai",
   plan: "Spark" as const,
   initials: "AM",
   location: "Karachi, PK",
@@ -45,7 +45,7 @@ export const trafficSources = [
 export const activity = [
   { title: "ATS score improved to 91", meta: "Senior Product Designer resume", time: "12m ago", kind: "success" as const },
   { title: "New job match found", meta: "Vercel · Product Designer · 94% match", time: "1h ago", kind: "info" as const },
-  { title: "Portfolio published", meta: "ayesha.careeros.site", time: "4h ago", kind: "success" as const },
+  { title: "Portfolio published", meta: "john.careeros.site", time: "4h ago", kind: "success" as const },
   { title: "Cover letter generated", meta: "Linear · Design Engineer", time: "Yesterday", kind: "info" as const },
   { title: "Skill gap detected", meta: "Design systems tokens · intermediate", time: "2d ago", kind: "warning" as const },
 ];
@@ -142,7 +142,7 @@ export const coachThread = [
   {
     role: "assistant" as const,
     content:
-      "Hi Ayesha — I reviewed your latest resume and portfolio. Your ATS score is strong at 91, but 4 of 9 experience bullets lack measurable outcomes. Want me to rewrite them with impact metrics?",
+      "Hi John — I reviewed your latest resume and portfolio. Your ATS score is strong at 91, but 4 of 9 experience bullets lack measurable outcomes. Want me to rewrite them with impact metrics?",
   },
   {
     role: "user" as const,

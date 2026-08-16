@@ -153,7 +153,7 @@ export function Hero() {
           </Card>
           <div className="pointer-events-none absolute -bottom-6 -left-6 hidden rounded-2xl border border-border bg-card px-4 py-3 shadow-lift sm:block">
             <p className="text-xs text-muted-foreground">Portfolio published</p>
-            <p className="text-sm font-semibold">ayesha.careeros.site</p>
+            <p className="text-sm font-semibold">john.careeros.site</p>
           </div>
         </motion.div>
       </div>
