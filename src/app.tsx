@@ -15,10 +15,10 @@ import {
   Faq,
   FinalCta,
 } from "./components/marketing/sections";
-import LandingPage from "./components/marketing/LandingPage";
+import LandingPage from "./components/marketing/landingpage";
 
 // Auth pages
-import LoginPage from "./components/auth/LoginPage";
+import LoginPage from "./components/auth/loginpage";
 import RegisterPage from "./components/auth/registerpage";
 import ForgotPasswordPage from "./components/auth/ForgotPasswordPage";
 import ResetPasswordPage from "./components/auth/ResetPasswordPage";

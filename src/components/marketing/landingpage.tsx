@@ -15,7 +15,6 @@ import SiteFooter from "./site-footer";
 export default function LandingPage() {
   return (
     <>
-      {/* Optional: add a marketing navbar/header here */}
       <SiteNavbar />
       <Hero />
       <Features />
