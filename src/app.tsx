@@ -9,7 +9,7 @@ import {
   Hero,
   Features,
   HowItWorks,
-  Templates,
+  // Templates,
   Pricing,
   Testimonials,
   Faq,
@@ -55,7 +55,7 @@ function App() {
       <Route path="/features" element={<Features />} />
       <Route path="/how-it-works" element={<HowItWorks />} />
       <Route path="/pricing" element={<Pricing />} />
-      <Route path="/templates" element={<Templates />} />
+      {/* <Route path="/templates" element={<Templates />} /> */}
 
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/auth/register" element={<RegisterPage />} />

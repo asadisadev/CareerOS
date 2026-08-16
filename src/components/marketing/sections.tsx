@@ -161,51 +161,60 @@ export function Hero() {
   );
 }
 
+
 const features = [
   {
     id: "resume-builder",
+    to: "/app/resume",
     icon: FileText,
     title: "Resume Builder",
     body: "Structured editor, live preview, multiple templates, PDF export and inline AI rewrites.",
   },
   {
     id: "portfolio-builder",
+    to: "/app/portfolio",
     icon: LayoutTemplate,
     title: "Portfolio Builder",
     body: "23 section types, drag-to-reorder, premium themes and responsive live preview.",
   },
   {
-    id: "ats-optimization",   // not linked from navbar, but you can add it
+    id: "ats-optimization",
+    to: "/app/ats",
     icon: Gauge,
     title: "ATS Optimization",
     body: "Score formatting, keywords, grammar, achievements and skills against any job description.",
   },
   {
     id: "ai-coach",
+    to: "/app/coach",
     icon: Bot,
     title: "AI Career Coach",
     body: "Grounded advice on your real documents: reviews, roadmaps and interview drills.",
   },
   {
     id: "job-matching",
+    to: "/app/jobs",
     icon: BriefcaseBusiness,
     title: "Job Matching",
     body: "Match scoring, skill-gap analysis, saved jobs and a full application tracker.",
   },
   {
     id: "cover-letters",
+    to: "/app/resume",  // you can later create a dedicated cover letter route if needed
     icon: Mail,
     title: "Cover Letters",
     body: "Role-specific letters generated from your resume and the target company's language.",
   },
   {
     id: "portfolio-hosting",
+    to: "/app/portfolio",
     icon: Globe,
     title: "Portfolio Hosting",
     body: "Custom domains, automatic SSL, SEO metadata and a built-in blog engine.",
   },
   {
     id: "career-analytics",
+    to: "/app/analytics",
     icon: LineChart,
     title: "Career Analytics",
     body: "Track portfolio visits, resume views, application funnel and score progression.",
@@ -224,19 +233,21 @@ export function Features() {
         {features.map((f, i) => (
           <motion.div
             key={f.title}
-            id={f.id}   // 👈 add this line
+            id={f.id}
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: i * 0.04 }}
           >
-            <Card className="group h-full rounded-2xl shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
-              <CardContent className="space-y-3 p-6">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary-soft text-primary transition-colors group-hover:bg-gradient-brand group-hover:text-primary-foreground">
-                  <f.icon className="h-5 w-5" />
-                </span>
-                <h3 className="font-display text-base font-bold">{f.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{f.body}</p>
-              </CardContent>
-            </Card>
+            <Link to={f.to} className="block h-full no-underline">
+              <Card className="group h-full rounded-2xl shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift cursor-pointer">
+                <CardContent className="space-y-3 p-6">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary-soft text-primary transition-colors group-hover:bg-gradient-brand group-hover:text-primary-foreground">
+                    <f.icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="font-display text-base font-bold">{f.title}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+                </CardContent>
+              </Card>
+            </Link>
           </motion.div>
         ))}
       </div>
@@ -290,96 +301,96 @@ export function HowItWorks() {
   );
 }
 
-export function Templates() {
-  return (
-    <Section id="templates" className="border-t border-border">
-      <SectionHeading
-        eyebrow="Templates & themes"
-        title="Designed by people who hire"
-        description="Resume templates that parse cleanly through applicant tracking systems, and portfolio themes that look hand-built."
-      />
-      <div className="mt-14 space-y-10">
-        <div>
-          <h3 className="mb-4 font-display text-lg font-bold">Resume templates</h3>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {resumeTemplates.map((t) => (
-              <Card key={t.id} className="group overflow-hidden rounded-2xl shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
-                <div className="relative aspect-[4/3] border-b border-border bg-muted/50 p-5">
-                  <div className="h-full rounded-lg bg-card p-4 shadow-soft">
-                    <div className="h-2.5 w-1/2 rounded bg-foreground/80" />
-                    <div className="mt-1.5 h-1.5 w-1/3 rounded bg-muted-foreground/50" />
-                    <div className="mt-4 space-y-1.5">
-                      {[90, 76, 84, 60, 70].map((w, idx) => (
-                        <div
-                          key={idx}
-                          className="h-1.5 rounded bg-muted-foreground/25"
-                          style={{ width: `${w}%` }}
-                        />
-                      ))}
-                    </div>
-                    <div className="mt-4 flex gap-1.5">
-                      {[0, 1, 2].map((k) => (
-                        <span key={k} className="h-4 w-10 rounded-full bg-primary/15" />
-                      ))}
-                    </div>
-                  </div>
-                  {t.pro && (
-                    <Badge className="absolute right-3 top-3 rounded-full bg-gradient-brand text-primary-foreground">
-                      Spark
-                    </Badge>
-                  )}
-                </div>
-                <CardContent className="flex items-center justify-between gap-3 p-4">
-                  <div className="min-w-0">
-                    <p className="truncate font-semibold">{t.name}</p>
-                    <p className="truncate text-xs text-muted-foreground">{t.tone}</p>
-                  </div>
-                  <Button asChild size="sm" variant="soft">
-                    <Link to="/app/resume">Use</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h3 className="mb-4 font-display text-lg font-bold">Portfolio themes</h3>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {portfolioThemes.map((t) => (
-              <Card key={t.id} className="group overflow-hidden rounded-2xl shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
-                <div className="relative aspect-[16/10] border-b border-border bg-gradient-brand/10 p-5">
-                  <div className="h-full rounded-xl bg-card p-4 shadow-soft">
-                    <div className="h-3 w-2/3 rounded bg-foreground/80" />
-                    <div className="mt-2 h-1.5 w-1/2 rounded bg-muted-foreground/40" />
-                    <div className="mt-4 grid grid-cols-3 gap-1.5">
-                      {[0, 1, 2, 3, 4, 5].map((k) => (
-                        <span key={k} className="aspect-square rounded-md bg-primary/12" />
-                      ))}
-                    </div>
-                  </div>
-                  {t.pro && (
-                    <Badge className="absolute right-3 top-3 rounded-full bg-gradient-brand text-primary-foreground">
-                      Spark
-                    </Badge>
-                  )}
-                </div>
-                <CardContent className="flex items-center justify-between gap-3 p-4">
-                  <div className="min-w-0">
-                    <p className="truncate font-semibold">{t.name}</p>
-                    <p className="truncate text-xs text-muted-foreground">{t.tone}</p>
-                  </div>
-                  <Button asChild size="sm" variant="soft">
-                    <Link to="/app/portfolio">Preview</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
+// export function Templates() {
+//   return (
+//     <Section id="templates" className="border-t border-border">
+//       <SectionHeading
+//         eyebrow="Templates & themes"
+//         title="Designed by people who hire"
+//         description="Resume templates that parse cleanly through applicant tracking systems, and portfolio themes that look hand-built."
+//       />
+//       <div className="mt-14 space-y-10">
+//         <div>
+//           <h3 className="mb-4 font-display text-lg font-bold">Resume templates</h3>
+//           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+//             {resumeTemplates.map((t) => (
+//               <Card key={t.id} className="group overflow-hidden rounded-2xl shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
+//                 <div className="relative aspect-[4/3] border-b border-border bg-muted/50 p-5">
+//                   <div className="h-full rounded-lg bg-card p-4 shadow-soft">
+//                     <div className="h-2.5 w-1/2 rounded bg-foreground/80" />
+//                     <div className="mt-1.5 h-1.5 w-1/3 rounded bg-muted-foreground/50" />
+//                     <div className="mt-4 space-y-1.5">
+//                       {[90, 76, 84, 60, 70].map((w, idx) => (
+//                         <div
+//                           key={idx}
+//                           className="h-1.5 rounded bg-muted-foreground/25"
+//                           style={{ width: `${w}%` }}
+//                         />
+//                       ))}
+//                     </div>
+//                     <div className="mt-4 flex gap-1.5">
+//                       {[0, 1, 2].map((k) => (
+//                         <span key={k} className="h-4 w-10 rounded-full bg-primary/15" />
+//                       ))}
+//                     </div>
+//                   </div>
+//                   {t.pro && (
+//                     <Badge className="absolute right-3 top-3 rounded-full bg-gradient-brand text-primary-foreground">
+//                       Spark
+//                     </Badge>
+//                   )}
+//                 </div>
+//                 <CardContent className="flex items-center justify-between gap-3 p-4">
+//                   <div className="min-w-0">
+//                     <p className="truncate font-semibold">{t.name}</p>
+//                     <p className="truncate text-xs text-muted-foreground">{t.tone}</p>
+//                   </div>
+//                   <Button asChild size="sm" variant="soft">
+//                     <Link to="/app/resume">Use</Link>
+//                   </Button>
+//                 </CardContent>
+//               </Card>
+//             ))}
+//           </div>
+//         </div>
+//         <div>
+//           <h3 className="mb-4 font-display text-lg font-bold">Portfolio themes</h3>
+//           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+//             {portfolioThemes.map((t) => (
+//               <Card key={t.id} className="group overflow-hidden rounded-2xl shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
+//                 <div className="relative aspect-[16/10] border-b border-border bg-gradient-brand/10 p-5">
+//                   <div className="h-full rounded-xl bg-card p-4 shadow-soft">
+//                     <div className="h-3 w-2/3 rounded bg-foreground/80" />
+//                     <div className="mt-2 h-1.5 w-1/2 rounded bg-muted-foreground/40" />
+//                     <div className="mt-4 grid grid-cols-3 gap-1.5">
+//                       {[0, 1, 2, 3, 4, 5].map((k) => (
+//                         <span key={k} className="aspect-square rounded-md bg-primary/12" />
+//                       ))}
+//                     </div>
+//                   </div>
+//                   {t.pro && (
+//                     <Badge className="absolute right-3 top-3 rounded-full bg-gradient-brand text-primary-foreground">
+//                       Spark
+//                     </Badge>
+//                   )}
+//                 </div>
+//                 <CardContent className="flex items-center justify-between gap-3 p-4">
+//                   <div className="min-w-0">
+//                     <p className="truncate font-semibold">{t.name}</p>
+//                     <p className="truncate text-xs text-muted-foreground">{t.tone}</p>
+//                   </div>
+//                   <Button asChild size="sm" variant="soft">
+//                     <Link to="/app/portfolio">Preview</Link>
+//                   </Button>
+//                 </CardContent>
+//               </Card>
+//             ))}
+//           </div>
+//         </div>
+//       </div>
+//     </Section>
+//   );
+// }
 
 export function Pricing() {
   return (

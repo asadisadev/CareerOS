@@ -2,7 +2,7 @@ import {
   Hero,
   Features,
   HowItWorks,
-  Templates,
+  // Templates,
   Pricing,
   Testimonials,
   Faq,
@@ -19,7 +19,7 @@ export default function LandingPage() {
       <Hero />
       <Features />
       <HowItWorks />
-      <Templates />
+      {/* <Templates /> */}
       <Pricing />
       <Testimonials />
       <Faq />
