@@ -8,6 +8,7 @@ import {
   Faq,
   FinalCta,
 } from "./sections";
+import { TemplatesCarousel } from "./resumereview";
 
 import SiteNavbar from "./site-navbar";
 import SiteFooter from "./site-footer";
@@ -20,6 +21,7 @@ export default function LandingPage() {
       <Features />
       <HowItWorks />
       {/* <Templates /> */}
+      <TemplatesCarousel />
       <Pricing />
       <Testimonials />
       <Faq />
