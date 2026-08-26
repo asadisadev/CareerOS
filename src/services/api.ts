@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://career-os-backend-nu.vercel.app/api';
+// const API_URL = 'http://localhost:5000/api';
 
 export const authAPI = {
   register: async (name: string, email: string, password: string) => {
