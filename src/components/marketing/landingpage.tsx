@@ -12,6 +12,7 @@ import { TemplatesCarousel } from "./resumereview";
 
 import SiteNavbar from "./site-navbar";
 import SiteFooter from "./site-footer";
+import { TemplatesSection } from "./sections/Templates";
 
 export default function LandingPage() {
   return (
@@ -22,6 +23,7 @@ export default function LandingPage() {
       <HowItWorks />
       {/* <Templates /> */}
       <TemplatesCarousel />
+      <TemplatesSection />
       <Pricing />
       <Testimonials />
       <Faq />

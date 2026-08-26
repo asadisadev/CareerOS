@@ -39,6 +39,7 @@ import Admin from "./components/app/admin/Admin";
 import OnboardingWelcome from "./components/onboarding/OnboardingWelcome";
 import OnboardingInterview from "./components/onboarding/OnboardingInterview";
 import OnboardingIndex from "./components/onboarding/OnboardingIndex";
+import { TemplatesPage } from "./components/marketing/TemplatesPage";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/features" element={<Features />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/templates" element={<TemplatesPage />} />
 
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />
