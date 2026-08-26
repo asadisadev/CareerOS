@@ -26,9 +26,9 @@ export default function RegisterPage() {
     setIsLoading(true);
     try {
       await register(name, email, password);
-      // Redirect happens inside context
+      // Auto-login happens inside context
     } catch (err: any) {
-      setError(err.message || 'Registration failed');
+      setError(err.message || 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }

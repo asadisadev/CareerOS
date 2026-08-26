@@ -112,7 +112,7 @@ function ContactRow({ resume }: { resume: Resume }) {
 function Header({ resume }: { resume: Resume }) {
   const p = resume.content.personal;
   return (
-    <header style={{ display: "flex", gap: 16, alignItems: "center" }}>
+    <header style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 12 }}>
       {resume.style.showPhoto && (
         <div
           style={{
@@ -361,21 +361,8 @@ function hasContent(resume: Resume, section: SectionMeta): boolean {
   }
 }
 
-/** Very rough content-length based pagination estimate for the page indicator. */
-export function estimatePageCount(resume: Resume): number {
-  const c = resume.content;
-  const units =
-    c.experience.reduce((n, e) => n + 3 + e.achievements.length + e.responsibilities.length, 0) +
-    c.projects.reduce((n, p) => n + 3 + p.achievements.length, 0) +
-    c.education.length * 4 +
-    Math.ceil(c.skills.length / 4) +
-    c.certifications.length * 2 +
-    c.achievements.length * 3 +
-    Math.ceil(c.summary.summary.length / 90) +
-    8;
-  const perPage = Math.max(30, Math.round(1000 / (resume.style.fontSize * resume.style.lineHeight)));
-  return Math.max(1, Math.ceil(units / perPage));
-}
+// ⚠️ IMPORTANT FIX: Removed estimatePageCount - now renders ALL content in a single page
+// The preview will auto-scale to fit
 
 export function ResumeDocument({
   resume,
@@ -392,7 +379,6 @@ export function ResumeDocument({
   const useSidebar = style.layout === "sidebar";
   const main = sections.filter((s) => !useSidebar || !sidebarKinds.has(s.kind));
   const side = useSidebar ? sections.filter((s) => sidebarKinds.has(s.kind)) : [];
-  const pages = estimatePageCount(resume);
 
   const renderSections = (list: SectionMeta[]) =>
     list.map((section) => {
@@ -409,50 +395,35 @@ export function ResumeDocument({
     });
 
   return (
-    <div className={cn("flex flex-col items-center gap-6", className)}>
-      {Array.from({ length: pages }).map((_, pageIndex) => (
+    <div className={cn("flex flex-col items-center", className)}>
+      <div
+        className="relative shrink-0 overflow-hidden rounded-[3px] bg-white shadow-[0_18px_50px_-24px_rgba(15,23,42,0.45)] ring-1 ring-black/10"
+        style={{
+          width: PAGE_WIDTH,
+          height: 'auto', // Auto height to fit content
+          minHeight: PAGE_HEIGHT,
+        }}
+      >
         <div
-          key={pageIndex}
-          className="relative shrink-0 overflow-hidden rounded-[3px] bg-white shadow-[0_18px_50px_-24px_rgba(15,23,42,0.45)] ring-1 ring-black/10"
           style={{
-            width: PAGE_WIDTH * zoom,
-            height: PAGE_HEIGHT * zoom,
+            padding: style.margin,
+            fontFamily: style.fontFamily,
+            fontSize: `${style.fontSize}pt`,
+            lineHeight: style.lineHeight,
+            color: "#1f2937",
           }}
-          aria-label={`Resume page ${pageIndex + 1} of ${pages}`}
         >
-          <div
-            style={{
-              width: PAGE_WIDTH,
-              height: PAGE_HEIGHT,
-              transform: `scale(${zoom})`,
-              transformOrigin: "top left",
-              padding: style.margin,
-              fontFamily: style.fontFamily,
-              fontSize: `${style.fontSize}pt`,
-              lineHeight: style.lineHeight,
-              color: "#1f2937",
-              // Subsequent pages continue the same flow; offset the content.
-              marginTop: pageIndex === 0 ? 0 : -(pageIndex * (PAGE_HEIGHT - style.margin * 2)),
-            }}
-          >
-            {pageIndex === 0 && <Header resume={resume} />}
-            {useSidebar ? (
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 210px", gap: 24 }}>
-                <div>{renderSections(main)}</div>
-                <div>{renderSections(side)}</div>
-              </div>
-            ) : (
-              renderSections(main)
-            )}
-          </div>
-          <span
-            className="pointer-events-none absolute bottom-2 right-3 text-[10px] font-medium text-slate-400"
-            aria-hidden="true"
-          >
-            {pageIndex + 1} / {pages}
-          </span>
+          <Header resume={resume} />
+          {useSidebar ? (
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 210px", gap: 24 }}>
+              <div>{renderSections(main)}</div>
+              <div>{renderSections(side)}</div>
+            </div>
+          ) : (
+            renderSections(main)
+          )}
         </div>
-      ))}
+      </div>
     </div>
   );
 }

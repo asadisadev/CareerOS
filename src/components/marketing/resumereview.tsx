@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Card, CardContent } from '../ui/card';
 import { ResumeDocument } from '../app/resume/preview';
-import { RESUME_TEMPLATES, MOCK_RESUMES } from '../../data/resume';
+import { RESUME_TEMPLATES, TEMPLATE_RESUMES } from '../../data/resume';
 import type { Resume } from '../../data/resume';
 
 export function TemplatesCarousel() {
@@ -23,9 +23,13 @@ export function TemplatesCarousel() {
     },
   });
 
-  const baseResume = MOCK_RESUMES[0];
-
+  // Use TEMPLATE_RESUMES directly (pre-generated with full content)
+  // OR use RESUME_TEMPLATES with MOCK_RESUMES
   const templateResumes = RESUME_TEMPLATES.map((template) => {
+    // Find existing template resume or create from first mock
+    const existing = TEMPLATE_RESUMES.find(r => r.style.templateId === template.id);
+    const baseResume = existing || TEMPLATE_RESUMES[0];
+    
     const styledResume: Resume = {
       ...baseResume,
       style: {
@@ -68,26 +72,32 @@ export function TemplatesCarousel() {
                   className="min-w-[220px] max-w-[280px] flex-[0_0_auto] group"
                 >
                   <Card className="relative h-full overflow-hidden rounded-2xl border-border/70 shadow-soft transition-shadow hover:shadow-lift">
-                    <div className="p-3 bg-muted/20 flex items-center justify-center" style={{ height: 300 }}>
-                      <ResumeDocument
-                        resume={resume}
-                        zoom={0.2}
-                        className="pointer-events-none"
-                      />
+                    <div 
+                      className="p-3 bg-muted/20 flex items-center justify-center overflow-hidden"
+                      style={{ height: 300 }}
+                    >
+                      <div className="scale-[0.22] origin-top transform">
+                        <ResumeDocument
+                          resume={resume}
+                          zoom={1}
+                          className="pointer-events-none"
+                        />
+                      </div>
                     </div>
 
                     <CardContent className="p-3 flex items-start justify-between gap-2 border-t border-border/50">
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <h3 className="truncate text-sm font-semibold">{template.name}</h3>
                         <p className="truncate text-[0.7rem] text-muted-foreground">{template.description}</p>
                       </div>
                       {template.tier === 'spark' && (
-                        <Badge className="rounded-full text-[0.6rem] bg-gradient-brand text-primary-foreground">
+                        <Badge className="rounded-full text-[0.6rem] bg-gradient-brand text-primary-foreground shrink-0">
                           Spark
                         </Badge>
                       )}
                     </CardContent>
 
+                    {/* Hover overlay */}
                     <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100 rounded-2xl p-4">
                       <Button
                         variant="hero"

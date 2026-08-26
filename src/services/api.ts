@@ -1,4 +1,3 @@
-// src/services/api.ts
 const API_URL = 'http://localhost:5000/api';
 
 export const authAPI = {
@@ -8,11 +7,13 @@ export const authAPI = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password }),
     });
+    
+    const data = await response.json();
+    
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || 'Registration failed');
+      throw new Error(data.error || 'Registration failed');
     }
-    return response.json();
+    return data;
   },
 
   login: async (email: string, password: string) => {
@@ -21,15 +22,16 @@ export const authAPI = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
+    
+    const data = await response.json();
+    
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || 'Login failed');
+      throw new Error(data.error || 'Login failed');
     }
-    return response.json();
+    return data;
   },
 };
 
-// Protected API calls (with token)
 export const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
   return {

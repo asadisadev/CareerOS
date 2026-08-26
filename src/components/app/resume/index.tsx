@@ -9,19 +9,22 @@ import { Resume, RESUME_TEMPLATES } from '../../../data/resume';
 import { ResumeDocument } from './preview';
 import { Button } from '../../../components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '../../../components/ui/tabs';
-import { Download, Loader2 } from 'lucide-react';
+import { Download, Loader2, ZoomIn, ZoomOut } from 'lucide-react';
+import { Slider } from '../../../components/ui/slider';
 
-const PREVIEW_ZOOM = 0.6;
+const MIN_ZOOM = 0.3;
+const MAX_ZOOM = 1.2;
+const DEFAULT_ZOOM = 0.6;
 
 export default function ResumePage() {
   const [searchParams] = useSearchParams();
   const templateId = searchParams.get('template');
-  // const [resume, setResume] = useState(null);
   const [resume, setResume] = useState<Resume | null>(null);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<'edit' | 'preview'>('edit');
   const [downloading, setDownloading] = useState(false);
-  const previewRef = useRef(null);
+  const [zoom, setZoom] = useState(DEFAULT_ZOOM);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const loadResume = async () => {
@@ -57,10 +60,15 @@ export default function ResumePage() {
     if (!previewRef.current) return;
     setDownloading(true);
     try {
-      const canvas = await html2canvas(previewRef.current, {
+      // Get the actual preview container
+      const previewElement = previewRef.current.querySelector('[data-preview-container]');
+      if (!previewElement) throw new Error('Preview element not found');
+
+      const canvas = await html2canvas(previewElement as HTMLElement, {
         scale: 2,
         useCORS: true,
         logging: false,
+        backgroundColor: '#ffffff',
       });
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
@@ -76,6 +84,18 @@ export default function ResumePage() {
     setDownloading(false);
   };
 
+  const handleZoomIn = () => {
+    setZoom((prev) => Math.min(MAX_ZOOM, prev + 0.1));
+  };
+
+  const handleZoomOut = () => {
+    setZoom((prev) => Math.max(MIN_ZOOM, prev - 0.1));
+  };
+
+  const handleZoomChange = (value: number[]) => {
+    setZoom(value[0]);
+  };
+
   if (loading || !resume) {
     return (
       <div className="flex h-full items-center justify-center">
@@ -87,6 +107,7 @@ export default function ResumePage() {
   return (
     <ResumeEditorProvider initial={resume}>
       <div className="flex h-full min-h-0 flex-col">
+        {/* Toolbar */}
         <div className="flex items-center justify-between border-b border-border px-4 py-2">
           <Tabs value={view} onValueChange={(v) => setView(v as 'edit' | 'preview')}>
             <TabsList>
@@ -94,25 +115,77 @@ export default function ResumePage() {
               <TabsTrigger value="preview">Preview</TabsTrigger>
             </TabsList>
           </Tabs>
-          <Button variant="hero" size="sm" onClick={handleDownloadPDF} disabled={downloading}>
-            {downloading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-            Download PDF
-          </Button>
+
+          <div className="flex items-center gap-2">
+            {/* Zoom Controls - Only show in preview mode */}
+            {view === 'preview' && (
+              <div className="flex items-center gap-2 mr-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleZoomOut}
+                  disabled={zoom <= MIN_ZOOM}
+                >
+                  <ZoomOut className="h-4 w-4" />
+                </Button>
+                <span className="text-sm font-medium min-w-[50px] text-center">
+                  {Math.round(zoom * 100)}%
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleZoomIn}
+                  disabled={zoom >= MAX_ZOOM}
+                >
+                  <ZoomIn className="h-4 w-4" />
+                </Button>
+                <div className="w-32 hidden md:block">
+                  <Slider
+                    value={[zoom]}
+                    min={MIN_ZOOM}
+                    max={MAX_ZOOM}
+                    step={0.05}
+                    onValueChange={handleZoomChange}
+                  />
+                </div>
+              </div>
+            )}
+
+            <Button variant="hero" size="sm" onClick={handleDownloadPDF} disabled={downloading}>
+              {downloading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+              Download PDF
+            </Button>
+          </div>
         </div>
 
+        {/* Main Content */}
         <div className="flex-1 flex min-h-0 overflow-hidden">
-          <aside className="w-64 shrink-0 border-r border-border overflow-y-auto">
-            <SectionNav />
-          </aside>
-          <main className="flex-1 overflow-y-auto p-6">
+          {/* Sidebar - Only in edit mode */}
+          {view === 'edit' && (
+            <aside className="w-64 shrink-0 border-r border-border overflow-y-auto">
+              <SectionNav />
+            </aside>
+          )}
+
+          <main className={`flex-1 overflow-y-auto ${view === 'preview' ? 'p-0' : 'p-6'}`}>
             {view === 'edit' ? (
               <SectionEditor />
             ) : (
-              <div className="flex justify-center items-start p-4 bg-muted/30 min-h-full overflow-y-auto">
-  <div ref={previewRef} className="shadow-lg">
-    <ResumeDocument resume={resume} zoom={PREVIEW_ZOOM} />
-  </div>
-</div>
+              <div
+                ref={previewRef}
+                className="flex justify-center items-start min-h-full w-full bg-muted/30 p-4 overflow-auto"
+              >
+                <div
+                  data-preview-container
+                  className="shadow-2xl ring-1 ring-black/10 transition-all duration-200"
+                  style={{
+                    transform: `scale(${zoom})`,
+                    transformOrigin: 'top center',
+                  }}
+                >
+                  <ResumeDocument resume={resume} zoom={1} />
+                </div>
+              </div>
             )}
           </main>
         </div>

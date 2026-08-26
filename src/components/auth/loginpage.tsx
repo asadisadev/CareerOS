@@ -27,7 +27,7 @@ export default function LoginPage() {
       await login(email, password);
       // Redirect happens inside context
     } catch (err: any) {
-      setError(err.message || 'Login failed');
+      setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +87,6 @@ export default function LoginPage() {
     </div>
   );
 }
-
 
 
 

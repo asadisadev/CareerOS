@@ -59,8 +59,8 @@ import {
   SidebarTrigger,
 } from "../../components/ui/sidebar";
 import { messages, notifications } from "../../data/dashboard";
-import { currentUser } from "../../data/mock";
 import { cn } from "../../lib/utils";
+import { useAuth } from "../../context/AuthContext";
 
 const primaryNav = [
   { label: "Dashboard", to: "/app" as const, icon: LayoutDashboard },
@@ -110,7 +110,7 @@ function CommandPalette({ open, onOpenChange }: { open: boolean; onOpenChange: (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput placeholder="Search or ask AI anything…" />
       <CommandList>
-        <CommandEmpty>No results yet — try “resume” or “interview”.</CommandEmpty>
+        <CommandEmpty>No results yet — try "resume" or "interview".</CommandEmpty>
         <CommandGroup heading="AI quick ask">
           {["Improve my ATS score", "Draft a cover letter", "Find remote React roles"].map((p) => (
             <CommandItem key={p} onSelect={() => onOpenChange(false)}>
@@ -131,9 +131,10 @@ function CommandPalette({ open, onOpenChange }: { open: boolean; onOpenChange: (
 }
 
 export function AppShell() {
-  // const pathname = useRouterState({ select: (s) => s.location.pathname });
   const pathname = useLocation().pathname;
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const { user, logout } = useAuth(); // <--- YEH LINE IMPORTANT
+
   const unread = notifications.filter((n) => n.unread).length;
 
   useEffect(() => {
@@ -276,21 +277,18 @@ export function AppShell() {
                   className="ml-1 flex items-center gap-2 rounded-full p-0.5 pr-2 transition-colors hover:bg-accent"
                   aria-label="Account menu"
                 >
-                  {/* <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-gradient-brand text-xs font-bold text-primary-foreground">
-                      {currentUser.initials}
-                    </AvatarFallback>
-                  </Avatar> */}
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white">
-    J
-  </div>
-                  <span className="hidden text-sm font-medium sm:inline">{currentUser.name}</span>
+                    {user?.name ? user.name.charAt(0).toUpperCase() : '?'}
+                  </div>
+                  <span className="hidden text-sm font-medium sm:inline">
+                    {user?.name || 'Guest'}
+                  </span>
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>
-                  <p className="text-sm font-semibold">{currentUser.name}</p>
-                  <p className="text-xs font-normal text-muted-foreground">{currentUser.email}</p>
+                  <p className="text-sm font-semibold">{user?.name || 'Guest'}</p>
+                  <p className="text-xs font-normal text-muted-foreground">{user?.email || 'Not signed in'}</p>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
@@ -306,8 +304,8 @@ export function AppShell() {
                   <Link to="/app/help">Support</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link to="/auth/login">Logout</Link>
+                <DropdownMenuItem onClick={logout}>
+                  Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -1,4 +1,3 @@
-// src/context/AuthContext.tsx
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { authAPI } from '../services/api';
 import { useNavigate } from 'react-router-dom';
@@ -31,8 +30,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const storedToken = localStorage.getItem('token');
     const storedUser = localStorage.getItem('user');
     if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+      try {
+        setToken(storedToken);
+        setUser(JSON.parse(storedUser));
+      } catch (e) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
     }
     setIsLoading(false);
   }, []);
@@ -47,7 +51,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(data.user);
       navigate('/app/dashboard');
     } catch (error: any) {
-      throw error;
+      console.error('Login error:', error);
+      throw new Error(error.message || 'Login failed');
     } finally {
       setIsLoading(false);
     }
@@ -61,9 +66,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem('user', JSON.stringify(data.user));
       setToken(data.token);
       setUser(data.user);
-      navigate('/app/dashboard'); // Ya '/onboarding' if you have that flow
+      navigate('/app/dashboard'); // Auto-login after registration
     } catch (error: any) {
-      throw error;
+      console.error('Registration error:', error);
+      throw new Error(error.message || 'Registration failed');
     } finally {
       setIsLoading(false);
     }
