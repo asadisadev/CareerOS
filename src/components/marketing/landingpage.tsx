@@ -22,9 +22,9 @@ export default function LandingPage() {
       <Features />
       <HowItWorks />
       {/* <Templates /> */}
-      <TemplatesCarousel />
+      {/* <TemplatesCarousel /> */}
       <TemplatesSection />
-      <Pricing />
+      {/* <Pricing /> */}
       <Testimonials />
       <Faq />
       <FinalCta />

@@ -22,7 +22,7 @@ const TEMPLATE_IMAGES: Record<string, string> = {
   'tech': '/templates/tech.png',
   'corporate': '/templates/corporate.png',
   'academic': '/templates/academic.png',
-  'premium': '/templates/premium.png',
+  // 'premium': '/templates/premium.png',
 };
 
 const FEATURED_TEMPLATES = [
@@ -41,9 +41,10 @@ export function TemplatesSection() {
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Crown className="h-6 w-6 text-primary" />
+            {/* <Crown className="h-6 w-6 text-primary" /> */}
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-              Premium Resume Templates
+              {/* Premium Resume Templates */}
+              Resume Templates
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -51,9 +52,9 @@ export function TemplatesSection() {
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Choose from professionally designed templates used by recruiters.
-            <span className="block text-sm mt-2 text-primary font-medium">
+            {/* <span className="block text-sm mt-2 text-primary font-medium">
               🔥 All templates include real content — just edit and save!
-            </span>
+            </span> */}
           </p>
         </div>
 
@@ -80,9 +81,9 @@ export function TemplatesSection() {
                         {/* Badges */}
                         {isPremium && (
                           <div className="absolute top-3 right-3 z-10">
-                            <span className="px-3 py-1 text-xs font-semibold bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full shadow-lg flex items-center gap-1">
+                            {/* <span className="px-3 py-1 text-xs font-semibold bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full shadow-lg flex items-center gap-1">
                               <Crown className="h-3 w-3" /> PRO
-                            </span>
+                            </span> */}
                           </div>
                         )}
                         {isExecutive && (
@@ -107,11 +108,11 @@ export function TemplatesSection() {
                         <div className="p-4">
                           <div className="flex items-center justify-between mb-1">
                             <h3 className="font-semibold text-lg">{template.name}</h3>
-                            {isPremium && (
+                            {/* {isPremium && (
                               <span className="text-xs font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 px-2 py-0.5 rounded-full">
                                 Premium
                               </span>
-                            )}
+                            )} */}
                           </div>
                           <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
                             {template.description}
