@@ -146,7 +146,7 @@ export function TemplatesSection() {
         <div className="text-center mt-12">
           <Button asChild variant="outline" size="lg">
             <Link to="/templates">
-              View All 11 Templates
+              View All Templates
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

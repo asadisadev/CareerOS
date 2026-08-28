@@ -66,31 +66,25 @@ export function ScorePill({ value, className }: { value: number; className?: str
   );
 }
 
+// In shared.tsx, update the Field component:
 export function Field({
   label,
-  htmlFor,
-  hint,
   children,
-  className,
-  action,
+  hint,
+  htmlFor,
 }: {
   label: string;
-  htmlFor?: string;
+  children: React.ReactNode;
   hint?: string;
-  children: ReactNode;
-  className?: string;
-  action?: ReactNode;
+  htmlFor?: string;
 }) {
   return (
-    <div className={cn("space-y-1.5", className)}>
-      <div className="flex items-center justify-between gap-2">
-        <Label htmlFor={htmlFor} className="text-xs font-semibold text-muted-foreground">
-          {label}
-        </Label>
-        {action}
-      </div>
+    <div className="space-y-1.5 w-full">
+      <Label htmlFor={htmlFor} className="text-sm font-medium">
+        {label}
+      </Label>
       {children}
-      {hint && <p className="text-[0.7rem] text-muted-foreground">{hint}</p>}
+      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
     </div>
   );
 }
